@@ -8,6 +8,12 @@ importers:
 
   .:
     devDependencies:
+      '@types/estree':
+        specifier: 1.0.5
+        version: 1.0.5
+      '@types/json-schema':
+        specifier: 7.0.15
+        version: 7.0.15
       '@typescript-eslint/parser':
         specifier: 8.4.0
         version: 8.4.0(eslint@9.10.0)(typescript@5.5.4)
@@ -315,6 +321,9 @@ packages:
 
   '@types/estree@1.0.5':
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
+
+  '@types/json-schema@7.0.15':
+    resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
 
   '@typescript-eslint/parser@8.4.0':
     resolution: {integrity: sha512-NHgWmKSgJk5K9N16GIhQ4jSobBoJwrmURaLErad0qlLjrpP5bECYg+wxVTGlGZmJbU03jj/dfnb6V9bw+5icsA==}
@@ -1123,6 +1132,8 @@ snapshots:
     optional: true
 
   '@types/estree@1.0.5': {}
+
+  '@types/json-schema@7.0.15': {}
 
   '@typescript-eslint/parser@8.4.0(eslint@9.10.0)(typescript@5.5.4)':
     dependencies:

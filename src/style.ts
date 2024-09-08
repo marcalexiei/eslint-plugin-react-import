@@ -7,11 +7,17 @@ interface StyleRuleOptions {
 const styleRule: Rule.RuleModule = {
   meta: {
     type: "suggestion",
-    docs: {
-      description:
-        "Enforces React import style across your code. Can be customized to use both default or namespace import",
-    },
     fixable: "code",
+    docs: {
+      description: [
+        "Enforces React import style across your code.",
+        "Can be customized to use default or namespace import.",
+        "By default converts exports using namespace import",
+      ].join(" "),
+    },
+    messages: {
+      wrongImport: "You should import React using {{syntax}} import syntax",
+    },
     schema: [
       {
         type: "object",
@@ -23,31 +29,39 @@ const styleRule: Rule.RuleModule = {
     ],
   },
   create(context) {
+    const [{ syntax = "namespace" } = {}] = context.options as [
+      StyleRuleOptions
+    ];
+
+    const invalidImportType = [
+      "ImportSpecifier",
+      syntax === "default"
+        ? "ImportNamespaceSpecifier"
+        : "ImportDefaultSpecifier",
+    ];
+
     return {
       ImportDeclaration: (node) => {
         if (node.source.value !== "react") return;
 
-        const hasImportDeclarations = node.specifiers.some(
-          (it) => it.type === "ImportSpecifier"
+        const hasImportDeclarations = node.specifiers.some((it) =>
+          invalidImportType.includes(it.type)
         );
 
         if (!hasImportDeclarations) return;
 
-        const [{ syntax = "namespace" } = {}] = context.options as [
-          StyleRuleOptions
-        ];
-
-        debugger;
-
         context.report({
-          message: `You should import React using a ${syntax} import`,
+          messageId: "wrongImport",
+          data: { syntax },
           loc: node.loc,
           fix: (fixer) => {
             const correctImport = syntax === "default" ? "React" : "* as React";
-            return fixer.replaceText(
-              node,
-              `import ${correctImport} from 'react';`
-            );
+            const importType =
+              "importKind" in node && node.importKind === "type" ? "type" : "";
+
+            const newImport = `import ${importType} ${correctImport} from 'react';`;
+
+            return fixer.replaceText(node, newImport.replace(/\s+/g, " "));
           },
         });
       },

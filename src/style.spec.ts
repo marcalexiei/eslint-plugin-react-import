@@ -84,7 +84,7 @@ describe("style rule ts", () => {
   });
 
   it("syntax: `namespace` and without options", () => {
-    ruleTester.run(" import syntax", styleRule, {
+    ruleTester.run("style", styleRule, {
       valid: [
         {
           code: "import * as React from 'react'",
@@ -130,12 +130,41 @@ describe("style rule ts", () => {
           output: "import * as React from 'react';",
           errors: ["You should import React using namespace import syntax"],
         },
+        // both import value and import type
+        {
+          code: "import React, { useState } from 'react';\nimport type { ComponentProps } from 'react';",
+          options: [{ syntax: "namespace" }],
+          output: "import * as React from 'react';\n",
+          errors: [
+            "You should import React using namespace import syntax",
+            "React was already imported. This import should be removed when using namespace import",
+          ],
+        },
+        {
+          code: "import type { ComponentProps } from 'react';\nimport React, { useState } from 'react';",
+          output: "import * as React from 'react';\n",
+          options: [{ syntax: "namespace" }],
+          errors: [
+            "You should import React using namespace import syntax",
+            "React was already imported. This import should be removed when using namespace import",
+          ],
+        },
+        // duplicate import types
+        {
+          code: "import type { ComponentProps } from 'react';\nimport type { HTMLProps } from 'react';",
+          output: "import type * as React from 'react';\n",
+          options: [{ syntax: "namespace" }],
+          errors: [
+            "You should import React using namespace import syntax",
+            "React was already imported. This import should be removed when using namespace import",
+          ],
+        },
       ],
     });
   });
 
   it("syntax: `default`", () => {
-    ruleTester.run(" import syntax", styleRule, {
+    ruleTester.run("style", styleRule, {
       valid: [
         {
           code: "import React from 'react'",
@@ -163,6 +192,35 @@ describe("style rule ts", () => {
           options: [{ syntax: "default" }],
           output: "import React from 'react';",
           errors: ["You should import React using default import syntax"],
+        },
+        // both import value and import type
+        {
+          code: "import React, { useState } from 'react';\nimport type { ComponentProps } from 'react';",
+          options: [{ syntax: "default" }],
+          output: "import React from 'react';\n",
+          errors: [
+            "You should import React using default import syntax",
+            "React was already imported. This import should be removed when using default import",
+          ],
+        },
+        {
+          code: "import type { ComponentProps } from 'react';\nimport React, { useState } from 'react';",
+          output: "import React from 'react';\n",
+          options: [{ syntax: "default" }],
+          errors: [
+            "You should import React using default import syntax",
+            "React was already imported. This import should be removed when using default import",
+          ],
+        },
+        // duplicate import types
+        {
+          code: "import type { ComponentProps } from 'react';\nimport type { HTMLProps } from 'react';",
+          output: "import type React from 'react';\n",
+          options: [{ syntax: "default" }],
+          errors: [
+            "You should import React using default import syntax",
+            "React was already imported. This import should be removed when using default import",
+          ],
         },
       ],
     });

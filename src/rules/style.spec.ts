@@ -7,6 +7,13 @@ import styleRule from "./style.js";
 describe("style rule js", () => {
   const ruleTester = new RuleTester();
 
+  it("wip", () => {
+    ruleTester.run("style", styleRule, {
+      valid: [],
+      invalid: [],
+    });
+  });
+
   it("syntax: `namespace` and without options", () => {
     ruleTester.run("style", styleRule, {
       valid: [
@@ -70,6 +77,22 @@ describe("style rule js", () => {
           options: [{ syntax: "default" }],
           output: "import React from 'react';",
           errors: ["You should import React using default import syntax"],
+        },
+      ],
+    });
+  });
+
+  it("should add prefix", () => {
+    ruleTester.run("style", styleRule, {
+      valid: [],
+      invalid: [
+        {
+          code: "import {useState} from 'react';\nuseState()",
+          output: "import * as React from 'react';\nReact.useState()",
+          errors: [
+            "You should import React using namespace import syntax",
+            "This React import should have a 'React.' prefix",
+          ],
         },
       ],
     });

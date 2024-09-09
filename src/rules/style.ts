@@ -20,6 +20,7 @@ const styleRule: Rule.RuleModule = {
       wrongImport: "You should import React using {{syntax}} import syntax",
       multipleImport:
         "React was already imported. This import should be removed when using {{syntax}} import",
+      addPrefix: "This React import should have a 'React.' prefix",
     },
     schema: [
       {
@@ -52,6 +53,8 @@ const styleRule: Rule.RuleModule = {
      */
     const reactInvalidImports: Array<ESTree.ImportDeclaration> = [];
 
+    const reactNamedImports: Array<string> = [];
+
     return {
       ImportDeclaration: (node) => {
         const { source, specifiers } = node;
@@ -59,12 +62,38 @@ const styleRule: Rule.RuleModule = {
         /** @todo might change selector to something like ImportDeclaration[source.value="react"] */
         if (source.value !== "react") return;
 
-        if (specifiers.some((it) => invalidImportTypes.includes(it.type))) {
+        let hasAtLeastOneNamedImport = false;
+        for (const specifier of specifiers) {
+          if (invalidImportTypes.includes(specifier.type)) {
+            hasAtLeastOneNamedImport = true;
+            if (specifier.type === "ImportSpecifier") {
+              /** Store named imports to use them to fix prefixes */
+              reactNamedImports.push(specifier.local.name);
+            }
+          }
+        }
+
+        if (hasAtLeastOneNamedImport) {
           reactInvalidImports.push(node);
         }
       },
 
-      "Program:exit": () => {
+      CallExpression: (node) => {
+        if (
+          node.callee.type === "Identifier" &&
+          reactNamedImports.includes(node.callee.name)
+        ) {
+          return context.report({
+            messageId: "addPrefix",
+            loc: { ...node.loc! },
+            fix(fixer) {
+              return fixer.insertTextBefore(node, "React.");
+            },
+          });
+        }
+      },
+
+      "Program:exit": (node) => {
         /** Check if there is at least one invalid import */
         if (!reactInvalidImports.length) return;
 

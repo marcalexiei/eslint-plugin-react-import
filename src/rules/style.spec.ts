@@ -7,13 +7,6 @@ import styleRule from "./style.js";
 describe("style rule js", () => {
   const ruleTester = new RuleTester();
 
-  it("wip", () => {
-    ruleTester.run("style", styleRule, {
-      valid: [],
-      invalid: [],
-    });
-  });
-
   it("syntax: `namespace` and without options", () => {
     ruleTester.run("style", styleRule, {
       valid: [
@@ -252,6 +245,55 @@ describe("style rule ts", () => {
           errors: [
             "You should import React using default import syntax",
             "React was already imported. This import should be removed when using default import",
+          ],
+        },
+      ],
+    });
+  });
+
+  it("should add prefix", () => {
+    ruleTester.run("style", styleRule, {
+      valid: [],
+      invalid: [
+        {
+          code: "import type { HTMLProps } from 'react';\ntype Props = HTMLProps<HTMLElement>;",
+          output:
+            "import type * as React from 'react';\ntype Props = React.HTMLProps<HTMLElement>;",
+          errors: [
+            "You should import React using namespace import syntax",
+            "This React import should have a 'React.' prefix",
+          ],
+        },
+        {
+          code: [
+            "import { useState } from 'react'",
+            "import type { HTMLProps } from 'react'",
+            "const [test, setTest] = useState<HTMLProps<HTMLElement>>()",
+          ].join("\n"),
+          output: [
+            "import * as React from 'react';",
+            "",
+            "const [test, setTest] = React.useState<React.HTMLProps<HTMLElement>>()",
+          ].join("\n"),
+          errors: [
+            "You should import React using namespace import syntax",
+            "React was already imported. This import should be removed when using namespace import",
+            "This React import should have a 'React.' prefix",
+            "This React import should have a 'React.' prefix",
+          ],
+        },
+        {
+          code: [
+            "import type { HTMLProps } from 'react'",
+            "interface Test extends HTMLProps<HTMLElement> {}",
+          ].join("\n"),
+          output: [
+            "import type * as React from 'react';",
+            "interface Test extends React.HTMLProps<HTMLElement> {}",
+          ].join("\n"),
+          errors: [
+            "You should import React using namespace import syntax",
+            "This React import should have a 'React.' prefix",
           ],
         },
       ],

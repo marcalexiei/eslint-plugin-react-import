@@ -84,25 +84,21 @@ const styleRule: Rule.RuleModule = {
         }
       },
 
-      CallExpression: (node) => {
-        if (
-          node.callee.type === "Identifier" &&
-          reactNamedImports.has(node.callee.name)
-        ) {
-          const originalImportName = reactNamedImports.get(node.callee.name)!;
+      /** Check all identifiers and if they match the one imported from React add the prefix */
+      'Identifier[parent.type!="ImportDefaultSpecifier"][parent.type!="ImportSpecifier"][parent.type!="ImportNamespaceSpecifier"]':
+        (node: ESTree.Identifier) => {
+          if (reactNamedImports.size > 0 && reactNamedImports.has(node.name)) {
+            const originalImportName = reactNamedImports.get(node.name)!;
 
-          return context.report({
-            messageId: "addPrefix",
-            loc: { ...node.loc! },
-            fix(fixer) {
-              return fixer.replaceText(
-                node.callee,
-                `React.${originalImportName}`
-              );
-            },
-          });
-        }
-      },
+            return context.report({
+              messageId: "addPrefix",
+              loc: { ...node.loc! },
+              fix(fixer) {
+                return fixer.replaceText(node, `React.${originalImportName}`);
+              },
+            });
+          }
+        },
 
       "Program:exit": () => {
         /** Check if there is at least one invalid import */

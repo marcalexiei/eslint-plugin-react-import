@@ -20,6 +20,7 @@ const styleRule: Rule.RuleModule = {
       wrongImport: "You should import React using {{syntax}} import syntax",
       multipleImport:
         "React was already imported. This import should be removed when using {{syntax}} import",
+      addPrefix: "This React import should have a 'React.' prefix",
     },
     schema: [
       {
@@ -52,6 +53,9 @@ const styleRule: Rule.RuleModule = {
      */
     const reactInvalidImports: Array<ESTree.ImportDeclaration> = [];
 
+    // Used to map react named imports to replace them with the original
+    const reactNamedImports = new Map<string, string>();
+
     return {
       ImportDeclaration: (node) => {
         const { source, specifiers } = node;
@@ -59,10 +63,42 @@ const styleRule: Rule.RuleModule = {
         /** @todo might change selector to something like ImportDeclaration[source.value="react"] */
         if (source.value !== "react") return;
 
-        if (specifiers.some((it) => invalidImportTypes.includes(it.type))) {
+        let hasAtLeastOneNamedImport = false;
+        for (const specifier of specifiers) {
+          if (invalidImportTypes.includes(specifier.type)) {
+            hasAtLeastOneNamedImport = true;
+            if (specifier.type === "ImportSpecifier") {
+              /** Store named imports to use them to fix prefixes */
+              reactNamedImports.set(
+                // this will be used to search the source code file
+                specifier.local.name,
+                // this will be used to replace the value
+                specifier.imported.name
+              );
+            }
+          }
+        }
+
+        if (hasAtLeastOneNamedImport) {
           reactInvalidImports.push(node);
         }
       },
+
+      /** Check all identifiers and if they match the one imported from React add the prefix */
+      'Identifier[parent.type!="ImportDefaultSpecifier"][parent.type!="ImportSpecifier"][parent.type!="ImportNamespaceSpecifier"]':
+        (node: ESTree.Identifier) => {
+          if (reactNamedImports.size > 0 && reactNamedImports.has(node.name)) {
+            const originalImportName = reactNamedImports.get(node.name)!;
+
+            return context.report({
+              messageId: "addPrefix",
+              loc: { ...node.loc! },
+              fix(fixer) {
+                return fixer.replaceText(node, `React.${originalImportName}`);
+              },
+            });
+          }
+        },
 
       "Program:exit": () => {
         /** Check if there is at least one invalid import */

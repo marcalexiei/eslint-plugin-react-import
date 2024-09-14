@@ -1,7 +1,7 @@
 import type { Rule } from "eslint";
 import type * as ESTree from "estree";
 
-interface StyleRuleOptions {
+export interface StyleRuleOptions {
   syntax: "default" | "namespace";
 }
 

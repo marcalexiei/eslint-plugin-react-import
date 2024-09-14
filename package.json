@@ -15,6 +15,7 @@
   "devDependencies": {
     "@types/estree": "1.0.5",
     "@types/json-schema": "7.0.15",
+    "@types/node": "20.16.5",
     "@typescript-eslint/parser": "8.5.0",
     "eslint": "9.10.0",
     "typescript": "5.5.4",

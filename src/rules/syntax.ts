@@ -1,11 +1,9 @@
 import type { Rule } from "eslint";
 import type * as ESTree from "estree";
 
-export interface StyleRuleOptions {
-  syntax: "default" | "namespace";
-}
+export type StyleRuleOptionsSyntax = "default" | "namespace";
 
-const styleRule: Rule.RuleModule = {
+const syntaxRule: Rule.RuleModule = {
   meta: {
     type: "suggestion",
     fixable: "code",
@@ -24,18 +22,12 @@ const styleRule: Rule.RuleModule = {
     },
     schema: [
       {
-        type: "object",
-        properties: {
-          syntax: { enum: ["default", "namespace"] },
-        },
-        additionalProperties: false,
+        enum: ["default", "namespace"],
       },
     ],
   },
   create(context) {
-    const [{ syntax = "namespace" } = {}] = context.options as [
-      StyleRuleOptions?
-    ];
+    const [syntax = "namespace"] = context.options as [StyleRuleOptionsSyntax?];
 
     let acceptedImportSpecifier =
       syntax === "default"
@@ -170,4 +162,4 @@ const styleRule: Rule.RuleModule = {
   },
 };
 
-export default styleRule;
+export default syntaxRule;

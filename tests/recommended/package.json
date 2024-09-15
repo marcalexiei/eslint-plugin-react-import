@@ -1,0 +1,11 @@
+{
+  "name": "eslint-plugin-react-import-tests-recommended",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "eslint ."
+  },
+  "devDependencies": {
+    "eslint-plugin-react-import": "workspace:*"
+  }
+}

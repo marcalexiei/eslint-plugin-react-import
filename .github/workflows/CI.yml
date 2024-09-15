@@ -42,3 +42,33 @@ jobs:
 
       - name: Run test
         run: pnpm run test
+
+  code-check:
+    name: Code check (${{ matrix.script }})
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: true
+      matrix:
+        script: ["lint"]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run ${{ matrix.script }}
+        run: pnpm run ${{ matrix.script }}

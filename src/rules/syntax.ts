@@ -29,7 +29,7 @@ const syntaxRule: Rule.RuleModule = {
   create(context) {
     const [syntax = "namespace"] = context.options as [StyleRuleOptionsSyntax?];
 
-    let acceptedImportSpecifier =
+    const acceptedImportSpecifier =
       syntax === "default"
         ? "ImportDefaultSpecifier"
         : "ImportNamespaceSpecifier";

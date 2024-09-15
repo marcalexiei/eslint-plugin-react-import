@@ -2,25 +2,25 @@ import { describe } from "vitest";
 import { RuleTester } from "eslint";
 import typescriptEslintParser from "@typescript-eslint/parser";
 
-import styleRule from "./style.js";
+import syntaxRule from "./syntax.js";
 
-describe("style rule js", () => {
+describe("syntax rule js", () => {
   const ruleTester = new RuleTester();
 
-  describe("syntax: `namespace` and without options", () => {
+  describe("`namespace` and without options", () => {
     describe("valid", () => {
-      ruleTester.run("style", styleRule, {
+      ruleTester.run("syntax", syntaxRule, {
         valid: [
           {
             code: "import * as React from 'react'",
           },
           {
             code: "import * as React from 'react'",
-            options: [{ syntax: "namespace" }],
+            options: ["namespace"],
           },
           {
             code: "import OtherModule from 'otherModule';",
-            options: [{ syntax: "namespace" }],
+            options: ["namespace"],
           },
         ],
         invalid: [],
@@ -28,7 +28,7 @@ describe("style rule js", () => {
     });
 
     describe("invalid", () => {
-      ruleTester.run("style", styleRule, {
+      ruleTester.run("syntax", syntaxRule, {
         valid: [],
 
         invalid: [
@@ -39,13 +39,13 @@ describe("style rule js", () => {
           },
           {
             code: "import React from 'react';",
-            options: [{ syntax: "namespace" }],
+            options: ["namespace"],
             output: "import * as React from 'react';",
             errors: ["You should import React using namespace import syntax"],
           },
           {
             code: "import { useState } from 'react';",
-            options: [{ syntax: "namespace" }],
+            options: ["namespace"],
             output: "import * as React from 'react';",
             errors: ["You should import React using namespace import syntax"],
           },
@@ -54,17 +54,17 @@ describe("style rule js", () => {
     });
   });
 
-  describe("syntax: `default`", () => {
+  describe("`default`", () => {
     describe("valid", () => {
-      ruleTester.run("style", styleRule, {
+      ruleTester.run("syntax", syntaxRule, {
         valid: [
           {
             code: "import React from 'react'",
-            options: [{ syntax: "default" }],
+            options: ["default"],
           },
           {
             code: "import OtherModule from 'otherModule';",
-            options: [{ syntax: "default" }],
+            options: ["default"],
           },
         ],
 
@@ -73,19 +73,19 @@ describe("style rule js", () => {
     });
 
     describe("invalid", () => {
-      ruleTester.run("style", styleRule, {
+      ruleTester.run("syntax", syntaxRule, {
         valid: [],
 
         invalid: [
           {
             code: "import React, { useState } from 'react';",
-            options: [{ syntax: "default" }],
+            options: ["default"],
             output: "import React from 'react';",
             errors: ["You should import React using default import syntax"],
           },
           {
             code: "import * as React from 'react';",
-            options: [{ syntax: "default" }],
+            options: ["default"],
             output: "import React from 'react';",
             errors: ["You should import React using default import syntax"],
           },
@@ -95,7 +95,7 @@ describe("style rule js", () => {
   });
 
   describe("should add prefix", () => {
-    ruleTester.run("style", styleRule, {
+    ruleTester.run("syntax", syntaxRule, {
       valid: [],
       invalid: [
         {
@@ -152,9 +152,9 @@ describe("style rule ts", () => {
     },
   });
 
-  describe("syntax: `namespace` and without options", () => {
+  describe("`namespace` and without options", () => {
     describe("valid", () => {
-      ruleTester.run("style", styleRule, {
+      ruleTester.run("syntax", syntaxRule, {
         valid: [
           {
             code: "import * as React from 'react'",
@@ -164,15 +164,15 @@ describe("style rule ts", () => {
           },
           {
             code: "import * as React from 'react'",
-            options: [{ syntax: "namespace" }],
+            options: ["namespace"],
           },
           {
             code: "import type * as React from 'react'",
-            options: [{ syntax: "namespace" }],
+            options: ["namespace"],
           },
           {
             code: "import OtherModule from 'otherModule';",
-            options: [{ syntax: "namespace" }],
+            options: ["namespace"],
           },
         ],
 
@@ -181,7 +181,7 @@ describe("style rule ts", () => {
     });
 
     describe("invalid", () => {
-      ruleTester.run("style", styleRule, {
+      ruleTester.run("syntax", syntaxRule, {
         valid: [],
 
         invalid: [
@@ -192,26 +192,26 @@ describe("style rule ts", () => {
           },
           {
             code: "import React from 'react';",
-            options: [{ syntax: "namespace" }],
+            options: ["namespace"],
             output: "import * as React from 'react';",
             errors: ["You should import React using namespace import syntax"],
           },
           {
             code: "import type React from 'react';",
-            options: [{ syntax: "namespace" }],
+            options: ["namespace"],
             output: "import type * as React from 'react';",
             errors: ["You should import React using namespace import syntax"],
           },
           {
             code: "import { useState } from 'react';",
-            options: [{ syntax: "namespace" }],
+            options: ["namespace"],
             output: "import * as React from 'react';",
             errors: ["You should import React using namespace import syntax"],
           },
           // both import value and import type
           {
             code: "import React, { useState } from 'react';\nimport type { ComponentProps } from 'react';",
-            options: [{ syntax: "namespace" }],
+            options: ["namespace"],
             output: "import * as React from 'react';\n",
             errors: [
               "You should import React using namespace import syntax",
@@ -221,7 +221,7 @@ describe("style rule ts", () => {
           {
             code: "import type { ComponentProps } from 'react';\nimport React, { useState } from 'react';",
             output: "import * as React from 'react';\n",
-            options: [{ syntax: "namespace" }],
+            options: ["namespace"],
             errors: [
               "You should import React using namespace import syntax",
               "React was already imported. This import should be removed when using namespace import",
@@ -231,7 +231,7 @@ describe("style rule ts", () => {
           {
             code: "import type { ComponentProps } from 'react';\nimport type { HTMLProps } from 'react';",
             output: "import type * as React from 'react';\n",
-            options: [{ syntax: "namespace" }],
+            options: ["namespace"],
             errors: [
               "You should import React using namespace import syntax",
               "React was already imported. This import should be removed when using namespace import",
@@ -259,21 +259,21 @@ describe("style rule ts", () => {
     });
   });
 
-  describe("syntax: `default`", () => {
+  describe("`default`", () => {
     describe("valid", () => {
-      ruleTester.run("style", styleRule, {
+      ruleTester.run("syntax", syntaxRule, {
         valid: [
           {
             code: "import React from 'react'",
-            options: [{ syntax: "default" }],
+            options: ["default"],
           },
           {
             code: "import type React from 'react'",
-            options: [{ syntax: "default" }],
+            options: ["default"],
           },
           {
             code: "import OtherModule from 'otherModule';",
-            options: [{ syntax: "default" }],
+            options: ["default"],
           },
         ],
 
@@ -282,26 +282,26 @@ describe("style rule ts", () => {
     });
 
     describe("invalid", () => {
-      ruleTester.run("style", styleRule, {
+      ruleTester.run("syntax", syntaxRule, {
         valid: [],
 
         invalid: [
           {
             code: "import React, { useState } from 'react';",
-            options: [{ syntax: "default" }],
+            options: ["default"],
             output: "import React from 'react';",
             errors: ["You should import React using default import syntax"],
           },
           {
             code: "import * as React from 'react';",
-            options: [{ syntax: "default" }],
+            options: ["default"],
             output: "import React from 'react';",
             errors: ["You should import React using default import syntax"],
           },
           // both import value and import type
           {
             code: "import React, { useState } from 'react';\nimport type { ComponentProps } from 'react';",
-            options: [{ syntax: "default" }],
+            options: ["default"],
             output: "import React from 'react';\n",
             errors: [
               "You should import React using default import syntax",
@@ -311,7 +311,7 @@ describe("style rule ts", () => {
           {
             code: "import type { ComponentProps } from 'react';\nimport React, { useState } from 'react';",
             output: "import React from 'react';\n",
-            options: [{ syntax: "default" }],
+            options: ["default"],
             errors: [
               "You should import React using default import syntax",
               "React was already imported. This import should be removed when using default import",
@@ -321,7 +321,7 @@ describe("style rule ts", () => {
           {
             code: "import type { ComponentProps } from 'react';\nimport type { HTMLProps } from 'react';",
             output: "import type React from 'react';\n",
-            options: [{ syntax: "default" }],
+            options: ["default"],
             errors: [
               "You should import React using default import syntax",
               "React was already imported. This import should be removed when using default import",
@@ -333,7 +333,7 @@ describe("style rule ts", () => {
   });
 
   describe("should add prefix", () => {
-    ruleTester.run("style", styleRule, {
+    ruleTester.run("syntax", syntaxRule, {
       valid: [],
       invalid: [
         {

@@ -5,7 +5,7 @@ export default [
   {
     ...eslintPluginReactImport.configs.recommended,
     languageOptions: {
-      ...eslintPluginReactImport.configs.recommended.linterOptions,
+      ...eslintPluginReactImport.configs.recommended.languageOptions,
       parser: typescriptEslintParser,
     },
   },

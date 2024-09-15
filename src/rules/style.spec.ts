@@ -1,4 +1,4 @@
-import { describe, it, test } from "vitest";
+import { describe } from "vitest";
 import { RuleTester } from "eslint";
 import typescriptEslintParser from "@typescript-eslint/parser";
 
@@ -8,7 +8,7 @@ describe("style rule js", () => {
   const ruleTester = new RuleTester();
 
   describe("syntax: `namespace` and without options", () => {
-    test("valid", () => {
+    describe("valid", () => {
       ruleTester.run("style", styleRule, {
         valid: [
           {
@@ -27,7 +27,7 @@ describe("style rule js", () => {
       });
     });
 
-    test("invalid", () => {
+    describe("invalid", () => {
       ruleTester.run("style", styleRule, {
         valid: [],
 
@@ -55,7 +55,7 @@ describe("style rule js", () => {
   });
 
   describe("syntax: `default`", () => {
-    test("valid", () => {
+    describe("valid", () => {
       ruleTester.run("style", styleRule, {
         valid: [
           {
@@ -72,7 +72,7 @@ describe("style rule js", () => {
       });
     });
 
-    test("invalid", () => {
+    describe("invalid", () => {
       ruleTester.run("style", styleRule, {
         valid: [],
 
@@ -94,7 +94,7 @@ describe("style rule js", () => {
     });
   });
 
-  it("should add prefix", () => {
+  describe("should add prefix", () => {
     ruleTester.run("style", styleRule, {
       valid: [],
       invalid: [
@@ -153,7 +153,7 @@ describe("style rule ts", () => {
   });
 
   describe("syntax: `namespace` and without options", () => {
-    test("valid", () => {
+    describe("valid", () => {
       ruleTester.run("style", styleRule, {
         valid: [
           {
@@ -180,7 +180,7 @@ describe("style rule ts", () => {
       });
     });
 
-    test("invalid", () => {
+    describe("invalid", () => {
       ruleTester.run("style", styleRule, {
         valid: [],
 
@@ -260,7 +260,7 @@ describe("style rule ts", () => {
   });
 
   describe("syntax: `default`", () => {
-    test("valid", () => {
+    describe("valid", () => {
       ruleTester.run("style", styleRule, {
         valid: [
           {
@@ -280,7 +280,8 @@ describe("style rule ts", () => {
         invalid: [],
       });
     });
-    test("invalid", () => {
+
+    describe("invalid", () => {
       ruleTester.run("style", styleRule, {
         valid: [],
 
@@ -331,7 +332,7 @@ describe("style rule ts", () => {
     });
   });
 
-  it("should add prefix", () => {
+  describe("should add prefix", () => {
     ruleTester.run("style", styleRule, {
       valid: [],
       invalid: [

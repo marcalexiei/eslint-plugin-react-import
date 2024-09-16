@@ -5,14 +5,14 @@ import { test } from "vitest";
 
 RuleTester.describe = function (
   _,
-  method: (...args: Array<unknown>) => unknown
+  method: (...args: Array<unknown>) => unknown,
 ): unknown {
   return method.call(this);
 };
 
 RuleTester.it = function (
   text: string,
-  method: (...args: Array<unknown>) => unknown
+  method: (...args: Array<unknown>) => unknown,
 ): void {
   test(text, method);
 };

@@ -113,7 +113,7 @@ describe("syntax rule js", () => {
             "useStateOriginal()",
           ].join("\n"),
           output: ["import * as React from 'react';", "React.useState()"].join(
-            "\n"
+            "\n",
           ),
           errors: [
             "You should import React using namespace import syntax",

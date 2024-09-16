@@ -35,19 +35,25 @@ describe("syntax rule js", () => {
           {
             code: "import React, { useState } from 'react';",
             output: "import * as React from 'react';",
-            errors: ["You should import React using namespace import syntax"],
+            errors: [
+              { messageId: "wrongImport", data: { syntax: "namespace" } },
+            ],
           },
           {
             code: "import React from 'react';",
             options: ["namespace"],
             output: "import * as React from 'react';",
-            errors: ["You should import React using namespace import syntax"],
+            errors: [
+              { messageId: "wrongImport", data: { syntax: "namespace" } },
+            ],
           },
           {
             code: "import { useState } from 'react';",
             options: ["namespace"],
             output: "import * as React from 'react';",
-            errors: ["You should import React using namespace import syntax"],
+            errors: [
+              { messageId: "wrongImport", data: { syntax: "namespace" } },
+            ],
           },
         ],
       });
@@ -81,13 +87,13 @@ describe("syntax rule js", () => {
             code: "import React, { useState } from 'react';",
             options: ["default"],
             output: "import React from 'react';",
-            errors: ["You should import React using default import syntax"],
+            errors: [{ messageId: "wrongImport", data: { syntax: "default" } }],
           },
           {
             code: "import * as React from 'react';",
             options: ["default"],
             output: "import React from 'react';",
-            errors: ["You should import React using default import syntax"],
+            errors: [{ messageId: "wrongImport", data: { syntax: "default" } }],
           },
         ],
       });
@@ -102,8 +108,8 @@ describe("syntax rule js", () => {
           code: "import {useState} from 'react';\nuseState()",
           output: "import * as React from 'react';\nReact.useState()",
           errors: [
-            "You should import React using namespace import syntax",
-            "This React import should have a 'React.' prefix",
+            { messageId: "wrongImport", data: { syntax: "namespace" } },
+            { messageId: "addPrefix" },
           ],
         },
         // with export renamed
@@ -116,8 +122,8 @@ describe("syntax rule js", () => {
             "\n",
           ),
           errors: [
-            "You should import React using namespace import syntax",
-            "This React import should have a 'React.' prefix",
+            { messageId: "wrongImport", data: { syntax: "namespace" } },
+            { messageId: "addPrefix" },
           ],
         },
         // Multiple imports
@@ -135,9 +141,9 @@ describe("syntax rule js", () => {
             "const ctx = React.createContext();",
           ].join("\n"),
           errors: [
-            "You should import React using namespace import syntax",
-            "React was already imported. This import should be removed when using namespace import",
-            "This React import should have a 'React.' prefix",
+            { messageId: "wrongImport", data: { syntax: "namespace" } },
+            { messageId: "duplicateImport", data: { syntax: "namespace" } },
+            { messageId: "addPrefix" },
           ],
         },
       ],
@@ -188,25 +194,33 @@ describe("style rule ts", () => {
           {
             code: "import React, { useState } from 'react';",
             output: "import * as React from 'react';",
-            errors: ["You should import React using namespace import syntax"],
+            errors: [
+              { messageId: "wrongImport", data: { syntax: "namespace" } },
+            ],
           },
           {
             code: "import React from 'react';",
             options: ["namespace"],
             output: "import * as React from 'react';",
-            errors: ["You should import React using namespace import syntax"],
+            errors: [
+              { messageId: "wrongImport", data: { syntax: "namespace" } },
+            ],
           },
           {
             code: "import type React from 'react';",
             options: ["namespace"],
             output: "import type * as React from 'react';",
-            errors: ["You should import React using namespace import syntax"],
+            errors: [
+              { messageId: "wrongImport", data: { syntax: "namespace" } },
+            ],
           },
           {
             code: "import { useState } from 'react';",
             options: ["namespace"],
             output: "import * as React from 'react';",
-            errors: ["You should import React using namespace import syntax"],
+            errors: [
+              { messageId: "wrongImport", data: { syntax: "namespace" } },
+            ],
           },
           // both import value and import type
           {
@@ -214,8 +228,8 @@ describe("style rule ts", () => {
             options: ["namespace"],
             output: "import * as React from 'react';\n",
             errors: [
-              "You should import React using namespace import syntax",
-              "React was already imported. This import should be removed when using namespace import",
+              { messageId: "wrongImport", data: { syntax: "namespace" } },
+              { messageId: "duplicateImport", data: { syntax: "namespace" } },
             ],
           },
           {
@@ -223,8 +237,8 @@ describe("style rule ts", () => {
             output: "import * as React from 'react';\n",
             options: ["namespace"],
             errors: [
-              "You should import React using namespace import syntax",
-              "React was already imported. This import should be removed when using namespace import",
+              { messageId: "wrongImport", data: { syntax: "namespace" } },
+              { messageId: "duplicateImport", data: { syntax: "namespace" } },
             ],
           },
           // duplicate import types
@@ -233,8 +247,8 @@ describe("style rule ts", () => {
             output: "import type * as React from 'react';\n",
             options: ["namespace"],
             errors: [
-              "You should import React using namespace import syntax",
-              "React was already imported. This import should be removed when using namespace import",
+              { messageId: "wrongImport", data: { syntax: "namespace" } },
+              { messageId: "duplicateImport", data: { syntax: "namespace" } },
             ],
           },
           // valid import and invalid type import
@@ -250,8 +264,8 @@ describe("style rule ts", () => {
               "const [test, setTest] = React.useState<React.HTMLProps<HTMLElement>>()",
             ].join("\n"),
             errors: [
-              "React was already imported. This import should be removed when using namespace import",
-              "This React import should have a 'React.' prefix",
+              { messageId: "duplicateImport", data: { syntax: "namespace" } },
+              { messageId: "addPrefix" },
             ],
           },
         ],
@@ -290,13 +304,13 @@ describe("style rule ts", () => {
             code: "import React, { useState } from 'react';",
             options: ["default"],
             output: "import React from 'react';",
-            errors: ["You should import React using default import syntax"],
+            errors: [{ messageId: "wrongImport", data: { syntax: "default" } }],
           },
           {
             code: "import * as React from 'react';",
             options: ["default"],
             output: "import React from 'react';",
-            errors: ["You should import React using default import syntax"],
+            errors: [{ messageId: "wrongImport", data: { syntax: "default" } }],
           },
           // both import value and import type
           {
@@ -304,8 +318,8 @@ describe("style rule ts", () => {
             options: ["default"],
             output: "import React from 'react';\n",
             errors: [
-              "You should import React using default import syntax",
-              "React was already imported. This import should be removed when using default import",
+              { messageId: "wrongImport", data: { syntax: "default" } },
+              { messageId: "duplicateImport", data: { syntax: "default" } },
             ],
           },
           {
@@ -313,8 +327,8 @@ describe("style rule ts", () => {
             output: "import React from 'react';\n",
             options: ["default"],
             errors: [
-              "You should import React using default import syntax",
-              "React was already imported. This import should be removed when using default import",
+              { messageId: "wrongImport", data: { syntax: "default" } },
+              { messageId: "duplicateImport", data: { syntax: "default" } },
             ],
           },
           // duplicate import types
@@ -323,8 +337,8 @@ describe("style rule ts", () => {
             output: "import type React from 'react';\n",
             options: ["default"],
             errors: [
-              "You should import React using default import syntax",
-              "React was already imported. This import should be removed when using default import",
+              { messageId: "wrongImport", data: { syntax: "default" } },
+              { messageId: "duplicateImport", data: { syntax: "default" } },
             ],
           },
         ],
@@ -341,8 +355,8 @@ describe("style rule ts", () => {
           output:
             "import type * as React from 'react';\ntype Props = React.HTMLProps<HTMLElement>;",
           errors: [
-            "You should import React using namespace import syntax",
-            "This React import should have a 'React.' prefix",
+            { messageId: "wrongImport", data: { syntax: "namespace" } },
+            { messageId: "addPrefix" },
           ],
         },
         {
@@ -357,10 +371,10 @@ describe("style rule ts", () => {
             "const [test, setTest] = React.useState<React.HTMLProps<HTMLElement>>()",
           ].join("\n"),
           errors: [
-            "You should import React using namespace import syntax",
-            "React was already imported. This import should be removed when using namespace import",
-            "This React import should have a 'React.' prefix",
-            "This React import should have a 'React.' prefix",
+            { messageId: "wrongImport", data: { syntax: "namespace" } },
+            { messageId: "duplicateImport", data: { syntax: "namespace" } },
+            { messageId: "addPrefix" },
+            { messageId: "addPrefix" },
           ],
         },
         {
@@ -373,8 +387,8 @@ describe("style rule ts", () => {
             "interface Test extends React.HTMLProps<HTMLElement> {}",
           ].join("\n"),
           errors: [
-            "You should import React using namespace import syntax",
-            "This React import should have a 'React.' prefix",
+            { messageId: "wrongImport", data: { syntax: "namespace" } },
+            { messageId: "addPrefix" },
           ],
         },
       ],

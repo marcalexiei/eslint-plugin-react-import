@@ -15,8 +15,8 @@ const syntaxRule: Rule.RuleModule = {
       ].join(" "),
     },
     messages: {
-      wrongImport: "You should import React using {{syntax}} import syntax",
-      multipleImport:
+      wrongImport: "You should import React using {{syntax}} syntax",
+      duplicateImport:
         "React was already imported. This import should be removed when using {{syntax}} import",
       addPrefix: "This React import should have a 'React.' prefix",
     },
@@ -148,7 +148,7 @@ const syntaxRule: Rule.RuleModule = {
             });
           } else {
             context.report({
-              messageId: "multipleImport",
+              messageId: "duplicateImport",
               data: { syntax },
               loc: { ...reactImportNode.loc! },
               fix(fixer) {

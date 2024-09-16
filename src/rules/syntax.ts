@@ -85,7 +85,7 @@ const syntaxRule: Rule.RuleModule = {
                 // this will be used to search the source code file
                 specifier.local.name,
                 // this will be used to replace the value
-                specifier.imported.name
+                specifier.imported.name,
               );
             }
           }
@@ -129,7 +129,7 @@ const syntaxRule: Rule.RuleModule = {
                 const importType = reactInvalidImports.every(
                   (importNode) =>
                     "importKind" in importNode &&
-                    importNode.importKind === "type"
+                    importNode.importKind === "type",
                 )
                   ? "type"
                   : "";
@@ -142,7 +142,7 @@ const syntaxRule: Rule.RuleModule = {
 
                 return fixer.replaceText(
                   reactImportNode,
-                  newImport.replace(/\s+/g, " ")
+                  newImport.replace(/\s+/g, " "),
                 );
               },
             });

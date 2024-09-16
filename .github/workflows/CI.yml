@@ -50,7 +50,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        script: ["lint"]
+        script: ["lint", "format"]
 
     steps:
       - name: Checkout

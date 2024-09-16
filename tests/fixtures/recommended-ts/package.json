@@ -1,14 +1,13 @@
 {
-  "name": "eslint-plugin-react-import-tests-recommended-ts",
+  "name": "recommended-ts",
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "eslint ."
+    "lint": "eslint ."
   },
   "devDependencies": {
     "@types/react": "18.3.5",
     "react": "18.3.1",
-    "@typescript-eslint/parser": "8.5.0",
     "eslint-plugin-react-import": "workspace:*"
   }
 }

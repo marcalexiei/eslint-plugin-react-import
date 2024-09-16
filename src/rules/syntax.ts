@@ -54,7 +54,10 @@ const syntaxRule: Rule.RuleModule = {
     const reactInvalidImports: Array<ESTree.ImportDeclaration> = [];
 
     /**
-     * @description Used to map react named imports to replace them with the original
+     * @description Map all react named imports:
+     * The key is the local file name, the value is the original name
+     * useState as useStateReact
+     * ^ value     ^ key
      */
     const reactNamedImports = new Map<string, string>();
 
@@ -66,7 +69,7 @@ const syntaxRule: Rule.RuleModule = {
         const { specifiers } = node;
 
         // if an import satisfies the preferred syntax it should not be added
-        // to invalid imports and should be remembered ti avoid
+        // to invalid imports and its presence should be remembered to avoid useless replace
         if (
           specifiers.length === 1 &&
           specifiers[0].type === acceptedImportSpecifier

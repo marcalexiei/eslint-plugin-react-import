@@ -1,9 +1,9 @@
 {
-  "name": "eslint-plugin-react-import-tests-recommended",
+  "name": "tests-recommended",
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "eslint ."
+    "lint": "eslint ."
   },
   "devDependencies": {
     "eslint-plugin-react-import": "workspace:*"

@@ -5,7 +5,7 @@ import tseslint from "typescript-eslint";
 
 /** @type {Array<import('eslint').Linter.Config>} */
 export default [
-  { ignores: ["dist", "tests"] },
+  { ignores: ["dist", "coverage", "tests/fixtures/**/*", "eslint.config.js"] },
   { files: ["**/*.{js,mjs,cjs,ts}"] },
   pluginJs.configs.recommended,
   pluginEslintPlugin.configs["flat/recommended"],
@@ -16,5 +16,12 @@ export default [
       "n/no-missing-import": ["error", { allowModules: ["estree"] }],
     },
   },
-  ...tseslint.configs.recommended,
+  ...tseslint.configs.recommendedTypeChecked,
+  {
+    languageOptions: {
+      parserOptions: {
+        project: true,
+      },
+    },
+  },
 ];

@@ -54,6 +54,9 @@ jobs:
       fail-fast: true
       matrix:
         script: ["lint", "format"]
+        include:
+          - needsBuild: true
+            script: "lint"
 
     steps:
       - name: Checkout
@@ -72,6 +75,10 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
+      - name: Build
+        if: ${{ matrix.needsBuild }}
+        run: pnpm build
 
       - name: Run ${{ matrix.script }}
         run: pnpm run ${{ matrix.script }}

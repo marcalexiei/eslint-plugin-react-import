@@ -1,1 +1,4 @@
 pnpm-lock.yaml
+# handled by eslint-doc-generator
+README.md
+*/*.md

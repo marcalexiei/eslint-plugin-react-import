@@ -12,19 +12,27 @@
     "default": "./dist/index.js",
     "types": "./dist/index.d.ts"
   },
+  "homepage": "https://github.com/marcalexiei/eslint-plugin-react-import",
   "keywords": [],
   "files": [
     "dist"
   ],
   "author": "Marco Pasqualetti @marcalexiei",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcalexiei/eslint-plugin-react-import.git"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint": "pnpm run lint:js && eslint-doc-generator",
+    "lint:js": "eslint .",
+    "lint:js:fix": "eslint . --fix",
+    "lint:docs": "eslint-doc-generator --check",
     "format": "prettier . --check",
     "format:fix": "prettier . --write",
-    "test": "vitest"
+    "test": "vitest",
+    "update:eslint-docs": "pnpm run build && eslint-doc-generator"
   },
   "packageManager": "pnpm@9.10.0+sha512.73a29afa36a0d092ece5271de5177ecbf8318d454ecd701343131b8ebc0c1a91c487da46ab77c8e596d6acf1461e3594ced4becedf8921b074fbd8653ed7051c",
   "devDependencies": {
@@ -34,6 +42,7 @@
     "@types/node": "20.16.5",
     "@typescript-eslint/parser": "8.6.0",
     "eslint": "9.10.0",
+    "eslint-doc-generator": "1.7.1",
     "eslint-plugin-eslint-plugin": "6.2.0",
     "eslint-plugin-n": "17.10.2",
     "prettier": "3.3.3",

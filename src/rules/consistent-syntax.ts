@@ -14,7 +14,7 @@ const syntaxRule: Rule.RuleModule = {
         "Enforces React import style across your code.",
         "Can be customized to use default or namespace import.",
       ].join(" "),
-      url: getRuleURL("syntax"),
+      url: getRuleURL("consistent-syntax"),
     },
     messages: {
       wrongImport: "You should import React using {{syntax}} syntax",

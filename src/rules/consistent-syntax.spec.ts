@@ -2,7 +2,7 @@ import { describe } from "vitest";
 import { RuleTester } from "eslint";
 import typescriptEslintParser from "@typescript-eslint/parser";
 
-import syntaxRule from "./syntax.js";
+import syntaxRule from "./consistent-syntax.js";
 
 describe("syntax rule js", () => {
   const ruleTester = new RuleTester();

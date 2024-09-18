@@ -1,4 +1,4 @@
-# Enforces React import style across your code. Can be customized to use default or namespace import. (`react-import/syntax`)
+# Enforces React import style across your code. Can be customized to use default or namespace import (`react-import/consistent-syntax`)
 
 💼 This rule is enabled in the ✅ `recommended` config.
 
@@ -21,7 +21,7 @@ import * as React from "react";
 ## Options
 
 ```text
-"react-import/syntax": [<enabled>, <'namespace' | 'default'>]
+"react-import/consistent-syntax": [<enabled>, <'namespace' | 'default'>]
 ```
 
 This rule has one string options that allows to choose the preferred syntax for React imports:

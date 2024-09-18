@@ -17,7 +17,7 @@ exports[`config recommended > should have errors for invalid > should have 2 err
     "message": "You should import React using namespace syntax",
     "messageId": "wrongImport",
     "nodeType": null,
-    "ruleId": "react-import/syntax",
+    "ruleId": "react-import/consistent-syntax",
     "severity": 2,
   },
   {
@@ -35,7 +35,7 @@ exports[`config recommended > should have errors for invalid > should have 2 err
     "message": "This React import should have a 'React.' prefix",
     "messageId": "addPrefix",
     "nodeType": null,
-    "ruleId": "react-import/syntax",
+    "ruleId": "react-import/consistent-syntax",
     "severity": 2,
   },
 ]
@@ -58,7 +58,7 @@ exports[`config recommended > should raise error when renaming a named import of
     "message": "You should import React using namespace syntax",
     "messageId": "wrongImport",
     "nodeType": null,
-    "ruleId": "react-import/syntax",
+    "ruleId": "react-import/consistent-syntax",
     "severity": 2,
   },
   {
@@ -76,7 +76,7 @@ exports[`config recommended > should raise error when renaming a named import of
     "message": "This React import should have a 'React.' prefix",
     "messageId": "addPrefix",
     "nodeType": null,
-    "ruleId": "react-import/syntax",
+    "ruleId": "react-import/consistent-syntax",
     "severity": 2,
   },
 ]

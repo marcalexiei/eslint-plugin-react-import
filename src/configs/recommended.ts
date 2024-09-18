@@ -13,7 +13,7 @@ export const createRecommendedConfig = (options: {
       "react-import": plugin,
     },
     rules: {
-      "react-import/syntax": ["error", "namespace"],
+      "react-import/consistent-syntax": ["error", "namespace"],
     },
     languageOptions: {
       parserOptions: {

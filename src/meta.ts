@@ -11,3 +11,7 @@ const {
 } = packageJSON;
 
 export { PLUGIN_NAME, PLUGIN_VERSION, PLUGIN_HOMEPAGE };
+
+export function getRuleURL(ruleID: string): string {
+  return `${PLUGIN_HOMEPAGE}/blob/main/docs/rules/${ruleID}.md`;
+}

@@ -1,7 +1,7 @@
 import type { Rule } from "eslint";
 import type * as ESTree from "estree";
 
-import { PLUGIN_HOMEPAGE } from "../meta.js";
+import { getRuleURL } from "../meta.js";
 
 export type StyleRuleOptionsSyntax = "default" | "namespace";
 
@@ -14,7 +14,7 @@ const syntaxRule: Rule.RuleModule = {
         "Enforces React import style across your code.",
         "Can be customized to use default or namespace import.",
       ].join(" "),
-      url: `${PLUGIN_HOMEPAGE}/docs/rules/syntax.md`,
+      url: getRuleURL("syntax"),
     },
     messages: {
       wrongImport: "You should import React using {{syntax}} syntax",

@@ -2,6 +2,8 @@
 
 [![CI](https://github.com/marcalexiei/eslint-plugin-react-import/actions/workflows/CI.yml/badge.svg)](https://github.com/marcalexiei/eslint-plugin-react-import/actions/workflows/CI.yml)
 [![Code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://prettier.io)
+[![npm version](https://img.shields.io/npm/v/eslint-plugin-react-import.svg?style=flat-square)](https://www.npmjs.com/package/eslint-plugin-react-import)
+[![issues](https://img.shields.io/github/issues/marcalexiei/eslint-plugin-react-import.svg)](https://github.com/marcalexiei/eslint-plugin-react-import/issues)
 
 ESLint plugin to ensure consistent react imports
 

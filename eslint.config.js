@@ -5,8 +5,9 @@ import tseslint from "typescript-eslint";
 
 /** @type {Array<import('eslint').Linter.Config>} */
 export default [
-  { ignores: ["dist", "coverage", "tests/fixtures/**/*", "eslint.config.js"] },
-  { files: ["**/*.{js,mjs,cjs,ts}"] },
+  {
+    ignores: ["dist", "coverage", "tests/fixtures/**/*"],
+  },
   pluginJs.configs.recommended,
   pluginEslintPlugin.configs["flat/recommended"],
   {
@@ -16,7 +17,6 @@ export default [
       "n/no-missing-import": ["error", { allowModules: ["estree"] }],
     },
   },
-  ...tseslint.configs.recommendedTypeChecked,
   {
     languageOptions: {
       parserOptions: {
@@ -24,4 +24,9 @@ export default [
       },
     },
   },
+  // typechecking related rule should run only inside src
+  ...tseslint.configs.recommendedTypeChecked.map((it) => ({
+    ...it,
+    files: ["src/**/*.{js,mjs,cjs,ts}"],
+  })),
 ];

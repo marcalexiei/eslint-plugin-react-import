@@ -4,6 +4,8 @@
   "exclude": ["**/*.spec.ts"],
   "compilerOptions": {
     "outDir": "dist",
-    "declaration": true
+    "moduleResolution": "Bundler",
+    "declaration": true,
+    "sourceMap": true
   }
 }

@@ -1,0 +1,83 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`legacy > should have errors for invalid > should have 2 errors: 1 for import and 1 for prefix 1`] = `
+[
+  {
+    "column": 1,
+    "endColumn": 41,
+    "endLine": 1,
+    "fix": {
+      "range": [
+        0,
+        40,
+      ],
+      "text": "import * as React from 'react';",
+    },
+    "line": 1,
+    "message": "You should import React using namespace syntax",
+    "messageId": "wrongImport",
+    "nodeType": null,
+    "ruleId": "react-import/consistent-syntax",
+    "severity": 2,
+  },
+  {
+    "column": 18,
+    "endColumn": 26,
+    "endLine": 4,
+    "fix": {
+      "range": [
+        84,
+        92,
+      ],
+      "text": "React.useState",
+    },
+    "line": 4,
+    "message": "This React import should have a 'React.' prefix",
+    "messageId": "addPrefix",
+    "nodeType": null,
+    "ruleId": "react-import/consistent-syntax",
+    "severity": 2,
+  },
+]
+`;
+
+exports[`legacy > should raise error when renaming a named import of \`react\` > 1 error for the import and 1 error for the useState 1`] = `
+[
+  {
+    "column": 1,
+    "endColumn": 58,
+    "endLine": 1,
+    "fix": {
+      "range": [
+        0,
+        57,
+      ],
+      "text": "import * as React from 'react';",
+    },
+    "line": 1,
+    "message": "You should import React using namespace syntax",
+    "messageId": "wrongImport",
+    "nodeType": null,
+    "ruleId": "react-import/consistent-syntax",
+    "severity": 2,
+  },
+  {
+    "column": 18,
+    "endColumn": 31,
+    "endLine": 4,
+    "fix": {
+      "range": [
+        101,
+        114,
+      ],
+      "text": "React.useState",
+    },
+    "line": 4,
+    "message": "This React import should have a 'React.' prefix",
+    "messageId": "addPrefix",
+    "nodeType": null,
+    "ruleId": "react-import/consistent-syntax",
+    "severity": 2,
+  },
+]
+`;

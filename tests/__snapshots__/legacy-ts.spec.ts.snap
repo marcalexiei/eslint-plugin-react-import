@@ -1,0 +1,178 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`legacy ts > should have errors for invalid > should have 3 errors: 1 for import and 1 for prefixes (useState, JSX) 1`] = `
+[
+  {
+    "column": 1,
+    "endColumn": 46,
+    "endLine": 1,
+    "fix": {
+      "range": [
+        0,
+        45,
+      ],
+      "text": "import * as React from 'react';",
+    },
+    "line": 1,
+    "message": "You should import React using namespace syntax",
+    "messageId": "wrongImport",
+    "nodeType": null,
+    "ruleId": "react-import/consistent-syntax",
+    "severity": 2,
+  },
+  {
+    "column": 25,
+    "endColumn": 28,
+    "endLine": 3,
+    "fix": {
+      "range": [
+        71,
+        74,
+      ],
+      "text": "React.JSX",
+    },
+    "line": 3,
+    "message": "This React import should have a 'React.' prefix",
+    "messageId": "addPrefix",
+    "nodeType": null,
+    "ruleId": "react-import/consistent-syntax",
+    "severity": 2,
+  },
+  {
+    "column": 18,
+    "endColumn": 26,
+    "endLine": 4,
+    "fix": {
+      "range": [
+        102,
+        110,
+      ],
+      "text": "React.useState",
+    },
+    "line": 4,
+    "message": "This React import should have a 'React.' prefix",
+    "messageId": "addPrefix",
+    "nodeType": null,
+    "ruleId": "react-import/consistent-syntax",
+    "severity": 2,
+  },
+]
+`;
+
+exports[`legacy ts > should raise error when having two imports (1 value and 1 type) > should have 4 errors: 2 for imports and 1 for prefixes (useState, JSX) 1`] = `
+[
+  {
+    "column": 1,
+    "endColumn": 41,
+    "endLine": 1,
+    "fix": {
+      "range": [
+        0,
+        40,
+      ],
+      "text": "import * as React from 'react';",
+    },
+    "line": 1,
+    "message": "You should import React using namespace syntax",
+    "messageId": "wrongImport",
+    "nodeType": null,
+    "ruleId": "react-import/consistent-syntax",
+    "severity": 2,
+  },
+  {
+    "column": 1,
+    "endColumn": 34,
+    "endLine": 2,
+    "fix": {
+      "range": [
+        41,
+        74,
+      ],
+      "text": "",
+    },
+    "line": 2,
+    "message": "React was already imported. This import should be removed when using namespace import",
+    "messageId": "duplicateImport",
+    "nodeType": null,
+    "ruleId": "react-import/consistent-syntax",
+    "severity": 2,
+  },
+  {
+    "column": 25,
+    "endColumn": 28,
+    "endLine": 4,
+    "fix": {
+      "range": [
+        100,
+        103,
+      ],
+      "text": "React.JSX",
+    },
+    "line": 4,
+    "message": "This React import should have a 'React.' prefix",
+    "messageId": "addPrefix",
+    "nodeType": null,
+    "ruleId": "react-import/consistent-syntax",
+    "severity": 2,
+  },
+  {
+    "column": 18,
+    "endColumn": 26,
+    "endLine": 5,
+    "fix": {
+      "range": [
+        131,
+        139,
+      ],
+      "text": "React.useState",
+    },
+    "line": 5,
+    "message": "This React import should have a 'React.' prefix",
+    "messageId": "addPrefix",
+    "nodeType": null,
+    "ruleId": "react-import/consistent-syntax",
+    "severity": 2,
+  },
+]
+`;
+
+exports[`legacy ts > should raise error when renaming a named import of \`react\` > 1 error for the import and 1 error for the useState 1`] = `
+[
+  {
+    "column": 1,
+    "endColumn": 58,
+    "endLine": 1,
+    "fix": {
+      "range": [
+        0,
+        57,
+      ],
+      "text": "import * as React from 'react';",
+    },
+    "line": 1,
+    "message": "You should import React using namespace syntax",
+    "messageId": "wrongImport",
+    "nodeType": null,
+    "ruleId": "react-import/consistent-syntax",
+    "severity": 2,
+  },
+  {
+    "column": 18,
+    "endColumn": 31,
+    "endLine": 4,
+    "fix": {
+      "range": [
+        114,
+        127,
+      ],
+      "text": "React.useState",
+    },
+    "line": 4,
+    "message": "This React import should have a 'React.' prefix",
+    "messageId": "addPrefix",
+    "nodeType": null,
+    "ruleId": "react-import/consistent-syntax",
+    "severity": 2,
+  },
+]
+`;

@@ -60,6 +60,24 @@ importers:
         specifier: 2.1.1
         version: 2.1.1(@types/node@20.16.5)
 
+  tests/fixtures/legacy:
+    devDependencies:
+      eslint-plugin-react-import:
+        specifier: workspace:*
+        version: link:../../..
+
+  tests/fixtures/legacy-ts:
+    devDependencies:
+      '@types/react':
+        specifier: 18.3.5
+        version: 18.3.5
+      eslint-plugin-react-import:
+        specifier: workspace:*
+        version: link:../../..
+      react:
+        specifier: 18.3.1
+        version: 18.3.1
+
   tests/fixtures/recommended:
     devDependencies:
       eslint-plugin-react-import:

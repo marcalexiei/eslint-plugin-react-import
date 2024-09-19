@@ -3,14 +3,15 @@ import { fileURLToPath } from "node:url";
 
 import { describe, expect, it } from "vitest";
 
-import { ESLint } from "eslint";
+import { loadESLint } from "eslint";
 
-const dirname = path.dirname(fileURLToPath(import.meta.url));
-const eslint = new ESLint({
-  cwd: path.join(dirname, "./fixtures/recommended"),
-});
+describe("config recommended", async () => {
+  const dirname = path.dirname(fileURLToPath(import.meta.url));
+  const ESLint = await loadESLint({ useFlatConfig: true });
+  const eslint = new ESLint({
+    cwd: path.join(dirname, "./fixtures/recommended"),
+  });
 
-describe("config recommended", () => {
   it("should have no error for valid file", async () => {
     const res = await eslint.lintFiles("./src/valid.jsx");
 

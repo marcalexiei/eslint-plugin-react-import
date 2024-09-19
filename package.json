@@ -1,8 +1,8 @@
 {
   "name": "eslint-plugin-react-import",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "type": "module",
-  "description": "ESLint plugin to ensure consistent react imports and relative usage",
+  "description": "ESLint plugin to ensure consistent react imports",
   "engines": {
     "node": "^18 || ^20 || ^22"
   },
@@ -13,7 +13,15 @@
     "types": "./dist/index.d.ts"
   },
   "homepage": "https://github.com/marcalexiei/eslint-plugin-react-import",
-  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/marcalexiei/eslint-plugin-react-import/issues"
+  },
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin",
+    "react-import"
+  ],
   "files": [
     "dist"
   ],
@@ -35,6 +43,9 @@
     "update:eslint-docs": "pnpm run build && eslint-doc-generator"
   },
   "packageManager": "pnpm@9.10.0+sha512.73a29afa36a0d092ece5271de5177ecbf8318d454ecd701343131b8ebc0c1a91c487da46ab77c8e596d6acf1461e3594ced4becedf8921b074fbd8653ed7051c",
+  "peerDependencies": {
+    "eslint": "^9"
+  },
   "devDependencies": {
     "@eslint/js": "9.10.0",
     "@types/estree": "1.0.5",

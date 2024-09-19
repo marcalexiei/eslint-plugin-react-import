@@ -1,6 +1,7 @@
 {
-  "name": "recommended-ts",
+  "name": "tests-recommended-ts",
   "private": true,
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "lint": "eslint ."

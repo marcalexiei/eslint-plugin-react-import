@@ -5,11 +5,11 @@ import { describe, expect, it } from "vitest";
 
 import { loadESLint } from "eslint";
 
-describe("config recommended", async () => {
+describe("legacy ts", async () => {
   const dirname = path.dirname(fileURLToPath(import.meta.url));
-  const ESLint = await loadESLint({ useFlatConfig: true });
+  const ESLint = await loadESLint({ useFlatConfig: false });
   const eslint = new ESLint({
-    cwd: path.join(dirname, "./fixtures/recommended-ts"),
+    cwd: path.join(dirname, "./fixtures/legacy-ts"),
   });
 
   it("should have no error for valid file", async () => {

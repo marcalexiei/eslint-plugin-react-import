@@ -5,15 +5,15 @@ import { describe, expect, it } from "vitest";
 
 import { loadESLint } from "eslint";
 
-describe("config recommended", async () => {
+describe("legacy", async () => {
   const dirname = path.dirname(fileURLToPath(import.meta.url));
-  const ESLint = await loadESLint({ useFlatConfig: true });
+  const ESLint = await loadESLint({ useFlatConfig: false });
   const eslint = new ESLint({
-    cwd: path.join(dirname, "./fixtures/recommended-ts"),
+    cwd: path.join(dirname, "./fixtures/legacy"),
   });
 
   it("should have no error for valid file", async () => {
-    const res = await eslint.lintFiles("./src/valid.tsx");
+    const res = await eslint.lintFiles("./src/valid.jsx");
 
     expect(res).toHaveLength(1);
 
@@ -23,33 +23,20 @@ describe("config recommended", async () => {
   });
 
   it("should have errors for invalid", async () => {
-    const res = await eslint.lintFiles("./src/invalid.tsx");
+    const res = await eslint.lintFiles("./src/invalid.jsx");
 
     expect(res).toHaveLength(1);
 
     const [invalidResult] = res;
-    expect(invalidResult).toHaveProperty("errorCount", 3);
-    expect(invalidResult).toHaveProperty("fixableErrorCount", 3);
+    expect(invalidResult).toHaveProperty("errorCount", 2);
+    expect(invalidResult).toHaveProperty("fixableErrorCount", 2);
     expect(invalidResult.messages).toMatchSnapshot(
-      "should have 3 errors: 1 for import and 1 for prefixes (useState, JSX)",
-    );
-  });
-
-  it("should raise error when having two imports (1 value and 1 type)", async () => {
-    const res = await eslint.lintFiles("./src/invalid-multiple-imports.tsx");
-
-    expect(res).toHaveLength(1);
-
-    const [invalidResult] = res;
-    expect(invalidResult).toHaveProperty("errorCount", 4);
-    expect(invalidResult).toHaveProperty("fixableErrorCount", 4);
-    expect(invalidResult.messages).toMatchSnapshot(
-      "should have 4 errors: 2 for imports and 1 for prefixes (useState, JSX)",
+      "should have 2 errors: 1 for import and 1 for prefix",
     );
   });
 
   it("should raise error when renaming a named import of `react`", async () => {
-    const res = await eslint.lintFiles("./src/invalid-renamed-import.tsx");
+    const res = await eslint.lintFiles("./src/invalid-renamed-import.jsx");
 
     expect(res).toHaveLength(1);
 

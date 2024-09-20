@@ -1,0 +1,12 @@
+{
+  "name": "tests-legacy",
+  "private": true,
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "lint": "NODE_OPTIONS=\"--no-warnings\" ESLINT_USE_FLAT_CONFIG=false eslint ./src --ext .jsx"
+  },
+  "devDependencies": {
+    "eslint-plugin-react-import": "workspace:*"
+  }
+}

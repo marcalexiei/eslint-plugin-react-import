@@ -1,4 +1,4 @@
-import { ESLint, Linter } from "eslint";
+import type { ESLint, Linter } from "eslint";
 import { PLUGIN_NAME } from "../meta.js";
 
 export const createRecommendedConfig = (options: {

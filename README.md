@@ -8,7 +8,8 @@
 ESLint plugin to ensure consistent react imports
 
 > [!WARNING]
-> This plugin supports `eslint >= 9` and only exposes flat configs
+> This plugin supports `eslint 8` but do not expose legacy configs.
+> See the [guide below](#configuration-legacy-eslintrc) use this plugin with legacy config
 
 ## Rules
 
@@ -76,4 +77,28 @@ export default [
     },
   },
 ];
+```
+
+## Configuration (legacy eslintrc)
+
+For legacy config there is no exported config. Since this plugin include one rule
+you just need to add the plugin name to plugins list and configure the rules:
+
+```js
+module.exports = {
+  root: true,
+  plugins: [
+    // Other plugins...
+    "react-import"
+    ],
+  // Remember to change parser if you are using ts
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    // ...
+  },
+  rules: {
+    // Configure the rule
+    "react-import/consistent-syntax": ["error", "namespace"],
+  },
+};
 ```

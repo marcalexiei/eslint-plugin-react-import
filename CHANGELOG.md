@@ -1,5 +1,11 @@
 # eslint-plugin-react-import
 
+## 1.1.1
+
+### Patch Changes
+
+- [`c525c7e`](https://github.com/marcalexiei/eslint-plugin-react-import/commit/c525c7e72349cddd6ab5c2ee30a1778c5be7919c) Thanks [@marcalexiei](https://github.com/marcalexiei)! - test user of github action
+
 ## 1.1.0
 
 ### Minor Changes

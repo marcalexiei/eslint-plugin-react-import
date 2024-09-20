@@ -1,5 +1,11 @@
 # eslint-plugin-react-import
 
+## 1.1.0
+
+### Minor Changes
+
+- [#16](https://github.com/marcalexiei/eslint-plugin-react-import/pull/16) [`db7df62`](https://github.com/marcalexiei/eslint-plugin-react-import/commit/db7df622305fdf638515b69938c1fa591fcf6ede) Thanks [@marcalexiei](https://github.com/marcalexiei)! - Add support for ESLint 8
+
 ## 1.0.0
 
 ### Major Changes

@@ -26,13 +26,18 @@ import * as React from "react";
 
 This rule has one string options that allows to choose the preferred syntax for React imports:
 
-### `namespace` (default)
+> [!NOTE]
+> If no option is provided `namespace` will be used.
+
+### `namespace`
+
+Examples of **incorrect** code with this option:
 
 ```js
 import React, { useState } from "react";
 ```
 
-Examples of **correct** code for this rule:
+Examples of **correct** code with this option:
 
 ```js
 import * as React from "react";
@@ -40,11 +45,13 @@ import * as React from "react";
 
 ### `default`
 
+Examples of **incorrect** code with this option:
+
 ```js
 import * as React from "react";
 ```
 
-Examples of **correct** code for this rule:
+Examples of **correct** code with this option:
 
 ```js
 import React from "react";

@@ -1,0 +1,45 @@
+version: 2
+
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    groups:
+      dev-deps-changeset:
+        applies-to: "version-updates"
+        dependency-type: "development"
+        patterns:
+          - "@changesets/*"
+
+      dev-deps-code-check:
+        applies-to: "version-updates"
+        dependency-type: "development"
+        patterns:
+          - "prettier"
+          - "eslint"
+          - "eslint-*"
+          - "@eslint/*"
+
+      dev-deps-build:
+        applies-to: "version-updates"
+        dependency-type: "development"
+        patterns:
+          - "@types/*"
+          - "@rollup/*"
+          - "rollup"
+          - "typescript"
+          - "@typescript-eslint/"
+
+      dev-deps-test:
+        applies-to: "version-updates"
+        dependency-type: "development"
+        patterns:
+          - "vitest"

@@ -19,9 +19,9 @@ ESLint plugin to ensure consistent react imports
 ✅ Set in the `recommended` configuration.\
 🔧 Automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/user-guide/command-line-interface#--fix).
 
-| Name                                                 | Description                                                                                         | 💼 | 🔧 |
-| :--------------------------------------------------- | :-------------------------------------------------------------------------------------------------- | :- | :- |
-| [consistent-syntax](docs/rules/consistent-syntax.md) | Enforces React import style across your code. Can be customized to use default or namespace import. | ✅  | 🔧 |
+| Name                                                 | Description                                                                                         | 💼  | 🔧  |
+| :--------------------------------------------------- | :-------------------------------------------------------------------------------------------------- | :-- | :-- |
+| [consistent-syntax](docs/rules/consistent-syntax.md) | Enforces React import style across your code. Can be customized to use default or namespace import. | ✅  | 🔧  |
 
 <!-- end auto-generated rules list -->
 
@@ -89,8 +89,8 @@ module.exports = {
   root: true,
   plugins: [
     // Other plugins...
-    "react-import"
-    ],
+    "react-import",
+  ],
   // Remember to change parser if you are using ts
   parser: "@typescript-eslint/parser",
   parserOptions: {

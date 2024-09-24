@@ -85,13 +85,17 @@ const syntaxRule: Rule.RuleModule = {
           if (invalidImportTypes.includes(specifier.type)) {
             hasAtLeastOneNamedImport = true;
             if (specifier.type === "ImportSpecifier") {
-              /** Store named imports to use them to fix prefixes */
-              reactNamedImports.set(
-                // this will be used to search the source code file
-                specifier.local.name,
-                // this will be used to replace the value
-                specifier.imported.name,
-              );
+              /** Store named imports to use them to add prefixes */
+
+              const { local, imported } = specifier;
+
+              /**
+               * Assuming React won't export items using literals
+               * @see https://github.com/tc39/ecma262/pull/2154
+               */
+              const exportedName = (imported as ESTree.Identifier).name;
+
+              reactNamedImports.set(local.name, exportedName);
             }
           }
         }

@@ -105,15 +105,18 @@ const syntaxRule: Rule.RuleModule = {
       'Identifier[parent.type!="ImportDefaultSpecifier"][parent.type!="ImportSpecifier"][parent.type!="ImportNamespaceSpecifier"]':
         (node: ESTree.Identifier) => {
           if (reactNamedImports.has(node.name)) {
-            const originalImportName = reactNamedImports.get(node.name)!;
+            const originalImportName = reactNamedImports.get(
+              node.name,
+            ) as string;
 
-            return context.report({
+            context.report({
               messageId: "addPrefix",
-              loc: { ...node.loc! },
+              loc: node.loc as ESTree.SourceLocation,
               fix(fixer) {
                 return fixer.replaceText(node, `React.${originalImportName}`);
               },
             });
+            return;
           }
         },
 
@@ -128,7 +131,7 @@ const syntaxRule: Rule.RuleModule = {
             context.report({
               messageId: "wrongImport",
               data: { syntax },
-              loc: { ...reactImportNode.loc! },
+              loc: reactImportNode.loc as ESTree.SourceLocation,
               fix(fixer) {
                 /** Cycle all imports to understand if it should become a import type */
                 const importType = reactInvalidImports.every(
@@ -155,7 +158,7 @@ const syntaxRule: Rule.RuleModule = {
             context.report({
               messageId: "duplicateImport",
               data: { syntax },
-              loc: { ...reactImportNode.loc! },
+              loc: reactImportNode.loc as ESTree.SourceLocation,
               fix(fixer) {
                 return fixer.remove(reactImportNode);
               },

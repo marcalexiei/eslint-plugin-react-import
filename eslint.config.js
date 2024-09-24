@@ -25,7 +25,7 @@ export default [
     },
   },
   // typechecking related rule should run only inside src
-  ...tseslint.configs.recommendedTypeChecked.map((it) => ({
+  ...tseslint.configs.strictTypeChecked.map((it) => ({
     ...it,
     files: ["src/**/*.{js,mjs,cjs,ts}"],
   })),

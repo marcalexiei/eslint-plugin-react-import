@@ -27,6 +27,7 @@ updates:
           - "eslint"
           - "eslint-*"
           - "@eslint/*"
+          - "typescript-eslint"
 
       dev-deps-build:
         applies-to: "version-updates"

@@ -1,20 +1,8 @@
 # Contributing
 
-## Setup
+## Setup instructions
 
-This repository uses:
-
-- `node` via [`nvm`](https://github.com/nvm-sh)
-- `pnpm` as package manager via `corepack`.
-
-```shell
-# install nvm
-nvm use
-```
-
-```shell
-corepack use pnpm
-```
+[https://marcalexiei.github.io/contribute/setup-pnpm-nvm.html](https://marcalexiei.github.io/contribute/setup-pnpm-nvm.html)
 
 To check that every thing works correctly run:
 
@@ -44,3 +32,7 @@ Be sure to check documentation lint via
 ```shell
 pnpm run lint:docs
 ```
+
+## Commit rules
+
+[https://marcalexiei.github.io/contribute/commit-rules.html](https://marcalexiei.github.io/contribute/commit-rules.html)

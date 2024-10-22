@@ -37,7 +37,7 @@ jobs:
       - name: Run test
         run: pnpm run test
 
-  code-check:
+  check:
     name: Code check (${{ matrix.script }})
     runs-on: ubuntu-latest
 
@@ -62,3 +62,20 @@ jobs:
 
       - name: Run ${{ matrix.script }}
         run: pnpm run ${{ matrix.script }}
+
+  ci-ok:
+    name: CI OK
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [test, check]
+    env:
+      FAILURE: ${{ contains(join(needs.*.result, ','), 'failure') }}
+    steps:
+      - name: Check for failure
+        run: |
+          echo $FAILURE
+          if [ "$FAILURE" = "false" ]; then
+            exit 0
+          else
+            exit 1
+          fi

@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 
 function MyComponent(): React.JSX.Element {
   const [name] = React.useState();

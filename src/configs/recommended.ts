@@ -1,5 +1,5 @@
-import type { ESLint, Linter } from "eslint";
-import { PLUGIN_NAME } from "../meta.js";
+import type { ESLint, Linter } from 'eslint';
+import { PLUGIN_NAME } from '../meta.js';
 
 export const createRecommendedConfig = (options: {
   plugin: ESLint.Plugin;
@@ -8,12 +8,12 @@ export const createRecommendedConfig = (options: {
 
   return {
     name: `${PLUGIN_NAME}/recommended`,
-    files: ["**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
+    files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],
     plugins: {
-      "react-import": plugin,
+      'react-import': plugin,
     },
     rules: {
-      "react-import/consistent-syntax": ["error", "namespace"],
+      'react-import/consistent-syntax': ['error', 'namespace'],
     },
     languageOptions: {
       parserOptions: {

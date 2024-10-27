@@ -1,51 +1,51 @@
-import type { Rule } from "eslint";
-import type * as ESTree from "estree";
+import type { Rule } from 'eslint';
+import type * as ESTree from 'estree';
 
-import { getRuleURL } from "../meta.js";
+import { getRuleURL } from '../meta.js';
 
-export type StyleRuleOptionsSyntax = "default" | "namespace";
+export type StyleRuleOptionsSyntax = 'default' | 'namespace';
 
 const syntaxRule: Rule.RuleModule = {
   meta: {
-    type: "suggestion",
-    fixable: "code",
+    type: 'suggestion',
+    fixable: 'code',
     docs: {
       description: [
-        "Enforces React import style across your code.",
-        "Can be customized to use default or namespace import.",
-      ].join(" "),
-      url: getRuleURL("consistent-syntax"),
+        'Enforces React import style across your code.',
+        'Can be customized to use default or namespace import.',
+      ].join(' '),
+      url: getRuleURL('consistent-syntax'),
     },
     messages: {
-      wrongImport: "You should import React using {{syntax}} syntax",
+      wrongImport: 'You should import React using {{syntax}} syntax',
       duplicateImport:
-        "React was already imported. This import should be removed when using {{syntax}} import",
+        'React was already imported. This import should be removed when using {{syntax}} import',
       addPrefix: "This React import should have a 'React.' prefix",
     },
     schema: [
       {
-        enum: ["default", "namespace"],
+        enum: ['default', 'namespace'],
       },
     ],
   },
   create(context) {
-    const [syntax = "namespace"] = context.options as [StyleRuleOptionsSyntax?];
+    const [syntax = 'namespace'] = context.options as [StyleRuleOptionsSyntax?];
 
     const acceptedImportSpecifier =
-      syntax === "default"
-        ? "ImportDefaultSpecifier"
-        : "ImportNamespaceSpecifier";
+      syntax === 'default'
+        ? 'ImportDefaultSpecifier'
+        : 'ImportNamespaceSpecifier';
     let hasAlreadyAnImportSatisfyingSyntax = false;
 
     const invalidImportTypes: Array<string> = [
-      "ImportSpecifier",
+      'ImportSpecifier',
       /**
        * Based on {@link StyleRuleOptions.syntax} we integrate the array with the unwanted import syntax:
        * If syntax is `default` we should exclude `namespace` imports and vice-versa.
        */
-      syntax === "default"
-        ? "ImportNamespaceSpecifier"
-        : "ImportDefaultSpecifier",
+      syntax === 'default'
+        ? 'ImportNamespaceSpecifier'
+        : 'ImportDefaultSpecifier',
     ];
 
     /**
@@ -66,7 +66,7 @@ const syntaxRule: Rule.RuleModule = {
     return {
       ImportDeclaration: (node) => {
         /** @todo might change selector to something like ImportDeclaration[source.value="react"] */
-        if (node.source.value !== "react") return;
+        if (node.source.value !== 'react') return;
 
         const { specifiers } = node;
 
@@ -84,7 +84,7 @@ const syntaxRule: Rule.RuleModule = {
         for (const specifier of specifiers) {
           if (invalidImportTypes.includes(specifier.type)) {
             hasAtLeastOneNamedImport = true;
-            if (specifier.type === "ImportSpecifier") {
+            if (specifier.type === 'ImportSpecifier') {
               /** Store named imports to use them to add prefixes */
 
               const { local, imported } = specifier;
@@ -114,7 +114,7 @@ const syntaxRule: Rule.RuleModule = {
             ) as string;
 
             context.report({
-              messageId: "addPrefix",
+              messageId: 'addPrefix',
               loc: node.loc as ESTree.SourceLocation,
               fix(fixer) {
                 return fixer.replaceText(node, `React.${originalImportName}`);
@@ -124,7 +124,7 @@ const syntaxRule: Rule.RuleModule = {
           }
         },
 
-      "Program:exit": () => {
+      'Program:exit': () => {
         /** Check if there is at least one invalid import */
         if (!reactInvalidImports.length) return;
 
@@ -133,34 +133,34 @@ const syntaxRule: Rule.RuleModule = {
           if (!hasAlreadyAnImportSatisfyingSyntax && index === 0) {
             /** Replace the first import with the right import based on options */
             context.report({
-              messageId: "wrongImport",
+              messageId: 'wrongImport',
               data: { syntax },
               loc: reactImportNode.loc as ESTree.SourceLocation,
               fix(fixer) {
                 /** Cycle all imports to understand if it should become a import type */
                 const importType = reactInvalidImports.every(
                   (importNode) =>
-                    "importKind" in importNode &&
-                    importNode.importKind === "type",
+                    'importKind' in importNode &&
+                    importNode.importKind === 'type',
                 )
-                  ? "type"
-                  : "";
+                  ? 'type'
+                  : '';
 
                 const correctImportSyntax =
-                  syntax === "default" ? "React" : "* as React";
+                  syntax === 'default' ? 'React' : '* as React';
 
                 /** @todo maybe there is a more smart method working directly on AST node to do this */
                 const newImport = `import ${importType} ${correctImportSyntax} from 'react';`;
 
                 return fixer.replaceText(
                   reactImportNode,
-                  newImport.replace(/\s+/g, " "),
+                  newImport.replace(/\s+/g, ' '),
                 );
               },
             });
           } else {
             context.report({
-              messageId: "duplicateImport",
+              messageId: 'duplicateImport',
               data: { syntax },
               loc: reactImportNode.loc as ESTree.SourceLocation,
               fix(fixer) {

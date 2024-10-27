@@ -48,7 +48,7 @@ pnpm add --save-dev eslint eslint-plugin-react-import
 
 ```js
 // eslint.config.js
-import eslintPluginReactImport from "eslint-plugin-react-import";
+import eslintPluginReactImport from 'eslint-plugin-react-import';
 export default [
   // other configs
   // ...
@@ -63,8 +63,8 @@ export default [
 
 ```js
 // eslint.config.js
-import eslintPluginReactImport from "eslint-plugin-react-import";
-import typescriptEslintParser from "@typescript-eslint/parser";
+import eslintPluginReactImport from 'eslint-plugin-react-import';
+import typescriptEslintParser from '@typescript-eslint/parser';
 
 export default [
   // other configs
@@ -89,16 +89,16 @@ module.exports = {
   root: true,
   plugins: [
     // Other plugins...
-    "react-import",
+    'react-import',
   ],
   // Remember to change parser if you are using ts
-  parser: "@typescript-eslint/parser",
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     // ...
   },
   rules: {
     // Configure the rule
-    "react-import/consistent-syntax": ["error", "namespace"],
+    'react-import/consistent-syntax': ['error', 'namespace'],
   },
 };
 ```

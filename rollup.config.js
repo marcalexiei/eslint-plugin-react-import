@@ -1,33 +1,33 @@
-import { promises as fs } from "node:fs";
+import { promises as fs } from 'node:fs';
 
-import { defineConfig } from "rollup";
-import typescript from "@rollup/plugin-typescript";
+import { defineConfig } from 'rollup';
+import typescript from '@rollup/plugin-typescript';
 
 export default defineConfig({
-  input: "src/index.ts",
+  input: 'src/index.ts',
 
   output: [
     {
-      dir: "dist",
-      entryFileNames: "[name].js",
-      format: "esm",
+      dir: 'dist',
+      entryFileNames: '[name].js',
+      format: 'esm',
       sourcemap: true,
     },
     {
-      dir: "dist",
-      entryFileNames: "[name].cjs",
-      format: "cjs",
+      dir: 'dist',
+      entryFileNames: '[name].cjs',
+      format: 'cjs',
       sourcemap: true,
     },
   ],
   plugins: [
-    typescript({ tsconfig: "tsconfig.build.json" }),
+    typescript({ tsconfig: 'tsconfig.build.json' }),
     {
-      name: "clean-dist",
+      name: 'clean-dist',
       async buildStart() {
-        await fs.rm("./dist", { recursive: true, force: true });
+        await fs.rm('./dist', { recursive: true, force: true });
       },
     },
   ],
-  external: ["eslint", "node:fs"],
+  external: ['eslint', 'node:fs'],
 });

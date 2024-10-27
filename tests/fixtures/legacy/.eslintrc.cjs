@@ -1,14 +1,14 @@
 module.exports = {
   root: true,
-  plugins: ["react-import"],
+  plugins: ['react-import'],
   parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
+    ecmaVersion: 'latest',
+    sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
     },
   },
   rules: {
-    "react-import/consistent-syntax": ["error", "namespace"],
+    'react-import/consistent-syntax': ['error', 'namespace'],
   },
 };

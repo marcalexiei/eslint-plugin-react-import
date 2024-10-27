@@ -1,5 +1,5 @@
-import eslintPluginReactImport from "eslint-plugin-react-import";
-import typescriptEslintParser from "@typescript-eslint/parser";
+import eslintPluginReactImport from 'eslint-plugin-react-import';
+import typescriptEslintParser from '@typescript-eslint/parser';
 
 export default [
   {

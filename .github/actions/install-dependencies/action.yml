@@ -3,7 +3,7 @@ description: This is a composite GitHub Action that sets up pnpm, node and insta
 
 inputs:
   node-version:
-    description: "Explicit node version. Otherwise fallback reading `.nvmrc`"
+    description: 'Explicit node version. Otherwise fallback reading `.nvmrc`'
 
 runs:
   using: composite
@@ -16,14 +16,14 @@ runs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ inputs.node-version }}
-        cache: "pnpm"
+        cache: 'pnpm'
 
     - name: Setup Node.js (via .nvmrc)
       if: ${{ !inputs.node-version }}
       uses: actions/setup-node@v4
       with:
-        node-version-file: ".nvmrc"
-        cache: "pnpm"
+        node-version-file: '.nvmrc'
+        cache: 'pnpm'
 
     - name: Install Dependencies
       shell: bash

@@ -34,7 +34,7 @@
   },
   "scripts": {
     "build": "rollup --config",
-    "lint": "pnpm run lint:js && eslint-doc-generator",
+    "lint": "pnpm run lint:js && pnpm run lint:docs",
     "lint:js": "eslint .",
     "lint:js:fix": "eslint . --fix",
     "lint:docs": "eslint-doc-generator --check",
@@ -45,7 +45,8 @@
     "release": "pnpm run build && changeset publish",
     "check-all": "pnpm run \"/^(lint|format|typecheck|build)$/\" && pnpm run test --run"
   },
-  "packageManager": "pnpm@9.10.0+sha512.73a29afa36a0d092ece5271de5177ecbf8318d454ecd701343131b8ebc0c1a91c487da46ab77c8e596d6acf1461e3594ced4becedf8921b074fbd8653ed7051c",
+  "packageManager": "pnpm@9.12.2+sha512.22721b3a11f81661ae1ec68ce1a7b879425a1ca5b991c975b074ac220b187ce56c708fe5db69f4c962c989452eee76c82877f4ee80f474cebd61ee13461b6228",
+  "prettier": "@marcalexiei/prettier-config",
   "peerDependencies": {
     "eslint": "^8.57 || ^9"
   },
@@ -53,6 +54,7 @@
     "@changesets/changelog-github": "0.5.0",
     "@changesets/cli": "2.27.9",
     "@eslint/js": "9.13.0",
+    "@marcalexiei/prettier-config": "1.0.4",
     "@rollup/plugin-typescript": "12.1.1",
     "@types/estree": "1.0.6",
     "@types/json-schema": "7.0.15",

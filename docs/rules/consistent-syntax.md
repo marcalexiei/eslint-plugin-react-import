@@ -9,13 +9,13 @@
 Examples of **incorrect** code for this rule:
 
 ```js
-import React, { useState } from "react";
+import React, { useState } from 'react';
 ```
 
 Examples of **correct** code for this rule:
 
 ```js
-import * as React from "react";
+import * as React from 'react';
 ```
 
 ## Options
@@ -34,13 +34,13 @@ This rule has one string options that allows to choose the preferred syntax for 
 Examples of **incorrect** code with this option:
 
 ```js
-import React, { useState } from "react";
+import React, { useState } from 'react';
 ```
 
 Examples of **correct** code with this option:
 
 ```js
-import * as React from "react";
+import * as React from 'react';
 ```
 
 ### `default`
@@ -48,13 +48,13 @@ import * as React from "react";
 Examples of **incorrect** code with this option:
 
 ```js
-import * as React from "react";
+import * as React from 'react';
 ```
 
 Examples of **correct** code with this option:
 
 ```js
-import React from "react";
+import React from 'react';
 ```
 
 ## When Not To Use It

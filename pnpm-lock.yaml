@@ -17,6 +17,9 @@ importers:
       '@eslint/js':
         specifier: 9.13.0
         version: 9.13.0
+      '@marcalexiei/prettier-config':
+        specifier: 1.0.4
+        version: 1.0.4(prettier@3.3.3)
       '@rollup/plugin-typescript':
         specifier: 12.1.1
         version: 12.1.1(rollup@4.24.0)(tslib@2.7.0)(typescript@5.6.3)
@@ -375,6 +378,12 @@ packages:
 
   '@manypkg/get-packages@1.1.3':
     resolution: {integrity: sha512-fo+QhuU3qE/2TQMQmbVMqaQ6EWbMhi4ABWP+O4AM1NqPBuy0OrApV5LO6BrrgnhtAHS2NH6RrVk9OL181tTi8A==}
+
+  '@marcalexiei/prettier-config@1.0.4':
+    resolution: {integrity: sha512-CMSAADRuQMqCJ4ShCpPUQVqI1M0DRk5zUgqLHfMEDHM+YiZyYcT2Xhvmo43BH3u74+Y/5XZBFbbH4MV+rmj1Ag==}
+    engines: {node: '>= 20'}
+    peerDependencies:
+      prettier: ^2.8.0 || ^3.0.0
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -1945,6 +1954,10 @@ snapshots:
       fs-extra: 8.1.0
       globby: 11.1.0
       read-yaml-file: 1.1.0
+
+  '@marcalexiei/prettier-config@1.0.4(prettier@3.3.3)':
+    dependencies:
+      prettier: 3.3.3
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:

@@ -1,5 +1,5 @@
-import { RuleTester } from "eslint";
-import { test } from "vitest";
+import { RuleTester } from 'eslint';
+import { test } from 'vitest';
 
 /** @see https://eslint.org/docs/latest/integrate/nodejs-api#customizing-ruletester */
 

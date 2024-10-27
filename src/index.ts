@@ -1,3 +1,3 @@
-import { eslintPluginReactImport } from "./eslintPluginReactImport.js";
+import { eslintPluginReactImport } from './eslintPluginReactImport.js';
 
 export default eslintPluginReactImport;

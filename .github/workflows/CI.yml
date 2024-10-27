@@ -1,7 +1,7 @@
 name: CI
 
 concurrency:
-  group: "${{ github.workflow }}-${{ github.head_ref || github.ref }}"
+  group: '${{ github.workflow }}-${{ github.head_ref || github.ref }}'
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 on:
@@ -44,10 +44,10 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        script: ["lint", "format"]
+        script: ['lint', 'format']
         include:
           - needsBuild: true
-            script: "lint"
+            script: 'lint'
 
     steps:
       - name: Checkout

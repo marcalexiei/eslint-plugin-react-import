@@ -35,16 +35,16 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          commit: "chore: release"
-          title: "chore: release"
-          publish: "pnpm release"
+          commit: 'chore: release'
+          title: 'chore: release'
+          publish: 'pnpm release'
         env:
           GITHUB_TOKEN: ${{ secrets.CHANGESET_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
 
   on-ci-fail:
-    name: "Failure"
+    name: 'Failure'
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
     steps:

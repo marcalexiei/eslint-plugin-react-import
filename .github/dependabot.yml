@@ -13,23 +13,20 @@ updates:
       interval: 'weekly'
     open-pull-requests-limit: 10
     groups:
-      dev-deps-changeset:
+      dev-changeset:
         applies-to: 'version-updates'
         dependency-type: 'development'
         patterns:
           - '@changesets/*'
 
-      dev-deps-code-check:
+      dev-code-check:
         applies-to: 'version-updates'
         dependency-type: 'development'
         patterns:
           - 'prettier'
-          - 'eslint'
-          - 'eslint-*'
-          - '@eslint/*'
-          - 'typescript-eslint'
+          - '@marcalexiei/prettier-config'
 
-      dev-deps-build:
+      dev:
         applies-to: 'version-updates'
         dependency-type: 'development'
         patterns:
@@ -37,10 +34,9 @@ updates:
           - '@rollup/*'
           - 'rollup'
           - 'typescript'
-          - '@typescript-eslint/'
-
-      dev-deps-test:
-        applies-to: 'version-updates'
-        dependency-type: 'development'
-        patterns:
+          - 'typescript-eslint'
+          - '@typescript-eslint/*'
+          - 'eslint'
+          - 'eslint-*'
+          - '@eslint/*'
           - 'vitest'

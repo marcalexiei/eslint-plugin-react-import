@@ -14,13 +14,19 @@ on:
 
 jobs:
   test:
-    name: Test (Node ${{ matrix.node }})
+    name: Test (Node ${{ matrix.node }}, ESLint ${{ matrix.eslint }})
     runs-on: ubuntu-latest
 
     strategy:
       fail-fast: true
       matrix:
         node: [18, 20, 22]
+        eslint: ['latest']
+        include:
+          - node: 22
+            eslint: 9.14
+          - node: 22
+            eslint: 9.15
 
     steps:
       - name: Checkout
@@ -30,6 +36,10 @@ jobs:
         uses: ./.github/actions/install-dependencies
         with:
           node-version: ${{ matrix.node }}
+
+      - name: Install ESLint ${{ matrix.eslint }}
+        if: matrix.eslint != 'latest'
+        run: pnpm add -d -w eslint@${{ matrix.eslint }}
 
       - name: Build
         run: pnpm run build

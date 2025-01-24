@@ -45,7 +45,7 @@
     "release": "pnpm run build && changeset publish",
     "check-all": "pnpm run \"/^(lint|format|typecheck|build)$/\" && pnpm run test --run"
   },
-  "packageManager": "pnpm@9.12.2+sha512.22721b3a11f81661ae1ec68ce1a7b879425a1ca5b991c975b074ac220b187ce56c708fe5db69f4c962c989452eee76c82877f4ee80f474cebd61ee13461b6228",
+  "packageManager": "pnpm@10.0.0+sha512.b8fef5494bd3fe4cbd4edabd0745df2ee5be3e4b0b8b08fa643aa3e4c6702ccc0f00d68fa8a8c9858a735a0032485a44990ed2810526c875e416f001b17df12b",
   "prettier": "@marcalexiei/prettier-config",
   "peerDependencies": {
     "eslint": "^8.57 || ^9"

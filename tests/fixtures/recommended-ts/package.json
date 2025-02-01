@@ -7,7 +7,7 @@
     "lint": "eslint ."
   },
   "devDependencies": {
-    "@types/react": "19.0.2",
+    "@types/react": "19.0.8",
     "react": "19.0.0",
     "eslint-plugin-react-import": "workspace:*"
   }

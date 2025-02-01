@@ -7,7 +7,7 @@
     "lint": "NODE_OPTIONS=\"--no-warnings\" ESLINT_USE_FLAT_CONFIG=false eslint ./src --ext .tsx"
   },
   "devDependencies": {
-    "@types/react": "19.0.2",
+    "@types/react": "19.0.8",
     "react": "19.0.0",
     "eslint-plugin-react-import": "workspace:*"
   }

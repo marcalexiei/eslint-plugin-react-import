@@ -45,7 +45,7 @@
     "release": "pnpm run build && changeset publish",
     "check-all": "pnpm run \"/^(lint|format|typecheck|build)$/\" && pnpm run test --run"
   },
-  "packageManager": "pnpm@10.0.0+sha512.b8fef5494bd3fe4cbd4edabd0745df2ee5be3e4b0b8b08fa643aa3e4c6702ccc0f00d68fa8a8c9858a735a0032485a44990ed2810526c875e416f001b17df12b",
+  "packageManager": "pnpm@10.6.2+sha512.47870716bea1572b53df34ad8647b42962bc790ce2bf4562ba0f643237d7302a3d6a8ecef9e4bdfc01d23af1969aa90485d4cebb0b9638fa5ef1daef656f6c1b",
   "prettier": "@marcalexiei/prettier-config",
   "peerDependencies": {
     "eslint": "^8.57 || ^9"
@@ -53,21 +53,21 @@
   "devDependencies": {
     "@changesets/changelog-github": "0.5.1",
     "@changesets/cli": "2.28.1",
-    "@eslint/js": "9.21.0",
+    "@eslint/js": "9.22.0",
     "@marcalexiei/prettier-config": "1.1.1",
     "@rollup/plugin-typescript": "12.1.2",
     "@types/estree": "1.0.6",
     "@types/json-schema": "7.0.15",
-    "@types/node": "22.10.10",
-    "@typescript-eslint/parser": "8.25.0",
-    "eslint": "9.21.0",
-    "eslint-doc-generator": "2.0.2",
+    "@types/node": "22.13.10",
+    "@typescript-eslint/parser": "8.26.0",
+    "eslint": "9.22.0",
+    "eslint-doc-generator": "2.1.0",
     "eslint-plugin-eslint-plugin": "6.4.0",
-    "eslint-plugin-n": "17.15.1",
-    "prettier": "3.5.2",
-    "rollup": "4.34.8",
+    "eslint-plugin-n": "17.16.2",
+    "prettier": "3.5.3",
+    "rollup": "4.35.0",
     "typescript": "5.8.2",
-    "typescript-eslint": "8.25.0",
-    "vitest": "3.0.7"
+    "typescript-eslint": "8.26.0",
+    "vitest": "3.0.8"
   }
 }

@@ -77,15 +77,10 @@ jobs:
     name: CI OK
     runs-on: ubuntu-latest
     if: always()
-    needs: [test, check]
-    env:
-      FAILURE: ${{ contains(join(needs.*.result, ','), 'failure') }}
+    needs:
+      - test
+      - check
     steps:
-      - name: Check for failure
-        run: |
-          echo $FAILURE
-          if [ "$FAILURE" = "false" ]; then
-            exit 0
-          else
-            exit 1
-          fi
+      - name: Exit with error if some jobs are not successful
+        run: exit 1
+        if: ${{ always() && (contains(needs.*.result, 'failure') || contains(needs.*.result, 'skipped') || contains(needs.*.result, 'cancelled')) }}

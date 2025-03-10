@@ -1,3 +1,5 @@
 packages:
-  - './'
-  - './tests/fixtures/**'
+  - ./
+  - ./tests/fixtures/**
+onlyBuiltDependencies:
+  - esbuild

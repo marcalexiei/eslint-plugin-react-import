@@ -23,12 +23,12 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        node: [18, 20, 22]
+        node: [18, 20, 22, 24]
         eslint: ['latest']
         include:
-          - node: 22
+          - node: 24
             eslint: 9.14
-          - node: 22
+          - node: 24
             eslint: 9.15
 
     steps:
@@ -57,7 +57,9 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        script: ['lint', 'format']
+        script:
+          - 'lint'
+          - 'format'
         include:
           - needsBuild: true
             script: 'lint'

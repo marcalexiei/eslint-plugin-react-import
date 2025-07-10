@@ -6,12 +6,17 @@
   "engines": {
     "node": "^20 || ^22 || ^24"
   },
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "zshy": {
+    "exports": "./src/index.ts"
+  },
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.cts",
   "exports": {
-    "types": "./dist/index.d.ts",
-    "require": "./dist/index.cjs",
-    "default": "./dist/index.js"
+    ".": {
+      "types": "./dist/index.d.cts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
   },
   "homepage": "https://github.com/marcalexiei/eslint-plugin-react-import",
   "bugs": {
@@ -33,7 +38,7 @@
     "url": "git+https://github.com/marcalexiei/eslint-plugin-react-import.git"
   },
   "scripts": {
-    "build": "rollup --config",
+    "build": "zshy",
     "lint": "pnpm run lint:js && pnpm run lint:docs",
     "lint:js": "eslint .",
     "lint:js:fix": "eslint . --fix",
@@ -68,6 +73,8 @@
     "rollup": "4.41.1",
     "typescript": "5.8.3",
     "typescript-eslint": "8.33.1",
-    "vitest": "3.2.2"
-  }
+    "vitest": "3.2.2",
+    "zshy": "0.0.15"
+  },
+  "module": "./dist/index.js"
 }

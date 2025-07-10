@@ -3,7 +3,7 @@
   "include": ["src"],
   "exclude": ["**/*.spec.ts"],
   "compilerOptions": {
-    "outDir": "dist",
+    "outDir": "dist-rollup",
     "moduleResolution": "Bundler",
     "declaration": true,
     "sourceMap": true

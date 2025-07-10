@@ -8,16 +8,18 @@ export default defineConfig({
 
   output: [
     {
-      dir: 'dist',
+      dir: 'dist-rollup',
       entryFileNames: '[name].js',
       format: 'esm',
       sourcemap: true,
+      preserveModules: true,
     },
     {
-      dir: 'dist',
+      dir: 'dist-rollup',
       entryFileNames: '[name].cjs',
       format: 'cjs',
       sourcemap: true,
+      preserveModules: true,
     },
   ],
   plugins: [

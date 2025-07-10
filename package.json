@@ -4,7 +4,7 @@
   "type": "module",
   "description": "ESLint plugin to ensure consistent react imports",
   "engines": {
-    "node": "^18 || ^20 || ^22 || ^24"
+    "node": "^20 || ^22 || ^24"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

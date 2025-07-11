@@ -1,14 +1,23 @@
-import pluginJs from '@eslint/js';
+import configBase from '@marcalexiei/eslint-config/base';
+import configTS from '@marcalexiei/eslint-config/typescript';
+import configVitest from '@marcalexiei/eslint-config/vitest';
 import pluginEslintPlugin from 'eslint-plugin-eslint-plugin';
 import pluginEslintNode from 'eslint-plugin-n';
-import tseslint from 'typescript-eslint';
 
 /** @type {Array<import('eslint').Linter.Config>} */
 export default [
   {
     ignores: ['dist', 'coverage', 'tests/fixtures/**/*'],
   },
-  pluginJs.configs.recommended,
+  configBase,
+  configTS,
+  {
+    ...configVitest,
+    rules: {
+      ...configVitest.rules,
+      'vitest/max-nested-describe': ['error', { max: 3 }],
+    },
+  },
   pluginEslintPlugin.configs['flat/recommended'],
   {
     ...pluginEslintNode.configs['flat/recommended-module'],
@@ -24,9 +33,4 @@ export default [
       },
     },
   },
-  // typechecking related rule should run only inside src
-  ...tseslint.configs.strictTypeChecked.map((it) => ({
-    ...it,
-    files: ['src/**/*.{js,mjs,cjs,ts}'],
-  })),
 ];

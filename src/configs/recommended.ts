@@ -1,4 +1,5 @@
 import type { ESLint, Linter } from 'eslint';
+
 import { PLUGIN_NAME } from '../meta.js';
 
 export const createRecommendedConfig = (options: {
@@ -6,6 +7,8 @@ export const createRecommendedConfig = (options: {
 }): Linter.Config => {
   const { plugin } = options;
 
+  // Disabled to due clash with eslint convention
+  /* eslint-disable @typescript-eslint/naming-convention */
   return {
     name: `${PLUGIN_NAME}/recommended`,
     files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],
@@ -23,4 +26,5 @@ export const createRecommendedConfig = (options: {
       },
     },
   };
+  /* eslint-enable @typescript-eslint/naming-convention */
 };

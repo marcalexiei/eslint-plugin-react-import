@@ -3,3 +3,4 @@ packages:
   - ./tests/fixtures/**
 onlyBuiltDependencies:
   - esbuild
+  - unrs-resolver

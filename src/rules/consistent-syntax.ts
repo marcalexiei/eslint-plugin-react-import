@@ -64,7 +64,8 @@ const syntaxRule: Rule.RuleModule = {
     const reactNamedImports = new Map<string, string>();
 
     return {
-      ImportDeclaration: (node) => {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      ImportDeclaration: (node): void => {
         /** @todo might change selector to something like ImportDeclaration[source.value="react"] */
         if (node.source.value !== 'react') return;
 
@@ -106,25 +107,24 @@ const syntaxRule: Rule.RuleModule = {
       },
 
       /** Check all identifiers and if they match the one imported from React add the prefix */
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       'Identifier[parent.type!="ImportDefaultSpecifier"][parent.type!="ImportSpecifier"][parent.type!="ImportNamespaceSpecifier"]':
-        (node: ESTree.Identifier) => {
+        (node: ESTree.Identifier): void => {
           if (reactNamedImports.has(node.name)) {
-            const originalImportName = reactNamedImports.get(
-              node.name,
-            ) as string;
+            const originalImportName = reactNamedImports.get(node.name)!;
 
             context.report({
               messageId: 'addPrefix',
-              loc: node.loc as ESTree.SourceLocation,
+              loc: node.loc!,
               fix(fixer) {
                 return fixer.replaceText(node, `React.${originalImportName}`);
               },
             });
-            return;
           }
         },
 
-      'Program:exit': () => {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      'Program:exit': (): void => {
         /** Check if there is at least one invalid import */
         if (!reactInvalidImports.length) return;
 
@@ -135,7 +135,7 @@ const syntaxRule: Rule.RuleModule = {
             context.report({
               messageId: 'wrongImport',
               data: { syntax },
-              loc: reactImportNode.loc as ESTree.SourceLocation,
+              loc: reactImportNode.loc!,
               fix(fixer) {
                 /** Cycle all imports to understand if it should become a import type */
                 const importType = reactInvalidImports.every(
@@ -162,7 +162,7 @@ const syntaxRule: Rule.RuleModule = {
             context.report({
               messageId: 'duplicateImport',
               data: { syntax },
-              loc: reactImportNode.loc as ESTree.SourceLocation,
+              loc: reactImportNode.loc!,
               fix(fixer) {
                 return fixer.remove(reactImportNode);
               },

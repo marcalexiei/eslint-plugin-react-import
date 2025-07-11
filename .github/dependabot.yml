@@ -25,14 +25,14 @@ updates:
         patterns:
           - 'prettier'
           - '@marcalexiei/prettier-config'
+          - '@marcalexiei/eslint-config'
 
       dev:
         applies-to: 'version-updates'
         dependency-type: 'development'
         patterns:
           - '@types/*'
-          - '@rollup/*'
-          - 'rollup'
+          - 'zshy'
           - 'typescript'
           - 'typescript-eslint'
           - '@typescript-eslint/*'

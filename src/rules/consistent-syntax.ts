@@ -67,7 +67,9 @@ const syntaxRule: Rule.RuleModule = {
       // eslint-disable-next-line @typescript-eslint/naming-convention
       ImportDeclaration: (node): void => {
         /** @todo might change selector to something like ImportDeclaration[source.value="react"] */
-        if (node.source.value !== 'react') return;
+        if (node.source.value !== 'react') {
+          return;
+        }
 
         const { specifiers } = node;
 
@@ -126,7 +128,9 @@ const syntaxRule: Rule.RuleModule = {
       // eslint-disable-next-line @typescript-eslint/naming-convention
       'Program:exit': (): void => {
         /** Check if there is at least one invalid import */
-        if (!reactInvalidImports.length) return;
+        if (!reactInvalidImports.length) {
+          return;
+        }
 
         /** All additional imports can be removed */
         for (const [index, reactImportNode] of reactInvalidImports.entries()) {

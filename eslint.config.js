@@ -18,7 +18,7 @@ export default [
       'vitest/max-nested-describe': ['error', { max: 3 }],
     },
   },
-  pluginEslintPlugin.configs['flat/recommended'],
+  pluginEslintPlugin.configs.recommended,
   {
     ...pluginEslintNode.configs['flat/recommended-module'],
     rules: {

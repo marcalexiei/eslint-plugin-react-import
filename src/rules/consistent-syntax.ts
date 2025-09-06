@@ -24,12 +24,14 @@ const syntaxRule: Rule.RuleModule = {
     },
     schema: [
       {
+        description: 'syntax to use',
         enum: ['default', 'namespace'],
       },
     ],
+    defaultOptions: ['namespace'],
   },
   create(context) {
-    const [syntax = 'namespace'] = context.options as [StyleRuleOptionsSyntax?];
+    const [syntax] = context.options as [StyleRuleOptionsSyntax];
 
     const acceptedImportSpecifier =
       syntax === 'default'

@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-react-import",
-  "version": "1.1.1",
+  "version": "2.0.0",
   "type": "module",
   "description": "ESLint plugin to ensure consistent react imports",
   "engines": {

@@ -1,5 +1,11 @@
 # eslint-plugin-react-import
 
+## 2.0.1
+
+### Patch Changes
+
+- [`326b353`](https://github.com/marcalexiei/eslint-plugin-react-import/commit/326b353845939c2ba0db4f4904d5f1670c146598) Thanks [@marcalexiei](https://github.com/marcalexiei)! - chore: enable trusted publising
+
 ## 2.0.0
 
 ### Major Changes

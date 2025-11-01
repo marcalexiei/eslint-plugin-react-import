@@ -71,7 +71,7 @@
     "@types/node": "24.9.2",
     "@typescript-eslint/parser": "8.46.2",
     "@vitest/eslint-plugin": "1.4.0",
-    "eslint": "9.37.0",
+    "eslint": "9.39.0",
     "eslint-doc-generator": "2.3.0",
     "eslint-plugin-eslint-plugin": "7.2.0",
     "eslint-plugin-n": "17.23.1",

@@ -1,5 +1,13 @@
 # eslint-plugin-react-import
 
+## 2.1.0
+
+### Minor Changes
+
+- [#122](https://github.com/marcalexiei/eslint-plugin-react-import/pull/122) [`72f16be`](https://github.com/marcalexiei/eslint-plugin-react-import/commit/72f16beb420e8686a9a0e9a9c26a27f1faf936fd) Thanks [@marcalexiei](https://github.com/marcalexiei)! - feat(consistent-syntax): add new `named` option
+
+  The rule automatically allows namespace imports (`import * as React`) when they are used to access dev-only React APIs such as `captureOwnerStack`, which [cannot be safely imported by name](https://react.dev/reference/react/captureOwnerStack#captureownerstack-is-not-available) in files bundled for both production and development.
+
 ## 2.0.1
 
 ### Patch Changes

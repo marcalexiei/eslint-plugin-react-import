@@ -43,6 +43,7 @@
   },
   "scripts": {
     "build": "zshy",
+    "build:docs": "pnpm run build && eslint-doc-generator",
     "lint": "pnpm run lint:js && pnpm run lint:docs",
     "lint:js": "eslint .",
     "lint:js:fix": "eslint . --fix",
@@ -50,7 +51,6 @@
     "format": "prettier . --check",
     "format:fix": "prettier . --write",
     "test": "vitest",
-    "update:eslint-docs": "pnpm run build && eslint-doc-generator",
     "release": "pnpm run build && changeset publish",
     "check-all": "pnpm run \"/^(lint|format|typecheck|build)$/\" && pnpm run test --run"
   },
@@ -71,8 +71,9 @@
     "@types/node": "24.9.2",
     "@typescript-eslint/parser": "8.46.2",
     "@vitest/eslint-plugin": "1.4.0",
+    "dedent": "1.7.2",
     "eslint": "9.37.0",
-    "eslint-doc-generator": "2.3.0",
+    "eslint-doc-generator": "3.3.2",
     "eslint-plugin-eslint-plugin": "7.2.0",
     "eslint-plugin-n": "17.23.1",
     "prettier": "3.6.2",

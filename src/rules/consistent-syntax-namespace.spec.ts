@@ -1,10 +1,11 @@
 import { describe } from 'vitest';
 import { RuleTester } from 'eslint';
 import typescriptEslintParser from '@typescript-eslint/parser';
+import dedent from 'dedent';
 
 import syntaxRule from './consistent-syntax.js';
 
-describe('syntax rule js', () => {
+describe('syntax rule js - `namespace`', () => {
   const ruleTester = new RuleTester();
 
   describe('`namespace` and without options', () => {
@@ -16,6 +17,19 @@ describe('syntax rule js', () => {
           },
           {
             code: "import * as React from 'react'",
+            options: ['namespace'],
+          },
+          {
+            code: dedent`
+              import * as React from 'react';
+              const el = React.createElement('div');
+            `,
+          },
+          {
+            code: dedent`
+              import * as React from 'react';
+              const [count, setCount] = React.useState(0);
+            `,
             options: ['namespace'],
           },
           {
@@ -48,6 +62,20 @@ describe('syntax rule js', () => {
             ],
           },
           {
+            code: dedent`
+              import React from 'react';
+              const el = React.createElement('div');
+            `,
+            options: ['namespace'],
+            output: dedent`
+              import * as React from 'react';
+              const el = React.createElement('div');
+            `,
+            errors: [
+              { messageId: 'wrongImport', data: { syntax: 'namespace' } },
+            ],
+          },
+          {
             code: "import { useState } from 'react';",
             options: ['namespace'],
             output: "import * as React from 'react';",
@@ -60,53 +88,19 @@ describe('syntax rule js', () => {
     });
   });
 
-  describe('`default`', () => {
-    describe('valid', () => {
-      ruleTester.run('syntax', syntaxRule, {
-        valid: [
-          {
-            code: "import React from 'react'",
-            options: ['default'],
-          },
-          {
-            code: "import OtherModule from 'otherModule';",
-            options: ['default'],
-          },
-        ],
-
-        invalid: [],
-      });
-    });
-
-    describe('invalid', () => {
-      ruleTester.run('syntax', syntaxRule, {
-        valid: [],
-
-        invalid: [
-          {
-            code: "import React, { useState } from 'react';",
-            options: ['default'],
-            output: "import React from 'react';",
-            errors: [{ messageId: 'wrongImport', data: { syntax: 'default' } }],
-          },
-          {
-            code: "import * as React from 'react';",
-            options: ['default'],
-            output: "import React from 'react';",
-            errors: [{ messageId: 'wrongImport', data: { syntax: 'default' } }],
-          },
-        ],
-      });
-    });
-  });
-
   describe('should add prefix', () => {
     ruleTester.run('syntax', syntaxRule, {
       valid: [],
       invalid: [
         {
-          code: "import {useState} from 'react';\nuseState()",
-          output: "import * as React from 'react';\nReact.useState()",
+          code: dedent`
+            import {useState} from 'react';
+            useState()
+          `,
+          output: dedent`
+            import * as React from 'react';
+            React.useState()
+          `,
           errors: [
             { messageId: 'wrongImport', data: { syntax: 'namespace' } },
             { messageId: 'addPrefix' },
@@ -114,13 +108,14 @@ describe('syntax rule js', () => {
         },
         // with export renamed
         {
-          code: [
-            "import {useState as useStateOriginal} from 'react';",
-            'useStateOriginal()',
-          ].join('\n'),
-          output: ["import * as React from 'react';", 'React.useState()'].join(
-            '\n',
-          ),
+          code: dedent`
+            import {useState as useStateOriginal} from 'react';
+            useStateOriginal()
+          `,
+          output: dedent`
+            import * as React from 'react';
+            React.useState()
+          `,
           errors: [
             { messageId: 'wrongImport', data: { syntax: 'namespace' } },
             { messageId: 'addPrefix' },
@@ -128,18 +123,18 @@ describe('syntax rule js', () => {
         },
         // Multiple imports
         {
-          code: [
-            "import React from 'react';",
-            "import {useState as useStateOriginal} from 'react';",
-            'useStateOriginal();',
-            'const ctx = React.createContext();',
-          ].join('\n'),
-          output: [
-            "import * as React from 'react';",
-            '',
-            'React.useState();',
-            'const ctx = React.createContext();',
-          ].join('\n'),
+          code: dedent`
+            import React from 'react';
+            import {useState as useStateOriginal} from 'react';
+            useStateOriginal();
+            const ctx = React.createContext();
+          `,
+          output: dedent`
+            import * as React from 'react';
+
+            React.useState();
+            const ctx = React.createContext();
+          `,
           errors: [
             { messageId: 'wrongImport', data: { syntax: 'namespace' } },
             { messageId: 'duplicateImport', data: { syntax: 'namespace' } },
@@ -151,7 +146,7 @@ describe('syntax rule js', () => {
   });
 });
 
-describe('style rule ts', () => {
+describe('syntax rule ts - `namespace`', () => {
   const ruleTester = new RuleTester({
     languageOptions: {
       parser: typescriptEslintParser,
@@ -170,6 +165,13 @@ describe('style rule ts', () => {
           },
           {
             code: "import * as React from 'react'",
+            options: ['namespace'],
+          },
+          {
+            code: dedent`
+              import * as React from 'react';
+              const [state, setState] = React.useState<string>('');
+            `,
             options: ['namespace'],
           },
           {
@@ -222,9 +224,26 @@ describe('style rule ts', () => {
               { messageId: 'wrongImport', data: { syntax: 'namespace' } },
             ],
           },
+          {
+            code: dedent`
+              import React from 'react';
+              const [state, setState] = React.useState<string>('');
+            `,
+            options: ['namespace'],
+            output: dedent`
+              import * as React from 'react';
+              const [state, setState] = React.useState<string>('');
+            `,
+            errors: [
+              { messageId: 'wrongImport', data: { syntax: 'namespace' } },
+            ],
+          },
           // both import value and import type
           {
-            code: "import React, { useState } from 'react';\nimport type { ComponentProps } from 'react';",
+            code: dedent`
+              import React, { useState } from 'react';
+              import type { ComponentProps } from 'react';
+            `,
             options: ['namespace'],
             output: "import * as React from 'react';\n",
             errors: [
@@ -233,7 +252,10 @@ describe('style rule ts', () => {
             ],
           },
           {
-            code: "import type { ComponentProps } from 'react';\nimport React, { useState } from 'react';",
+            code: dedent`
+              import type { ComponentProps } from 'react';
+              import React, { useState } from 'react';
+            `,
             output: "import * as React from 'react';\n",
             options: ['namespace'],
             errors: [
@@ -243,7 +265,10 @@ describe('style rule ts', () => {
           },
           // duplicate import types
           {
-            code: "import type { ComponentProps } from 'react';\nimport type { HTMLProps } from 'react';",
+            code: dedent`
+              import type { ComponentProps } from 'react';
+              import type { HTMLProps } from 'react';
+            `,
             output: "import type * as React from 'react';\n",
             options: ['namespace'],
             errors: [
@@ -253,92 +278,19 @@ describe('style rule ts', () => {
           },
           // valid import and invalid type import
           {
-            code: [
-              "import * as React from 'react';",
-              "import type { HTMLProps } from 'react'",
-              'const [test, setTest] = React.useState<HTMLProps<HTMLElement>>()',
-            ].join('\n'),
-            output: [
-              "import * as React from 'react';",
-              '',
-              'const [test, setTest] = React.useState<React.HTMLProps<HTMLElement>>()',
-            ].join('\n'),
+            code: dedent`
+              import * as React from 'react';
+              import type { HTMLProps } from 'react'
+              const [test, setTest] = React.useState<HTMLProps<HTMLElement>>()
+            `,
+            output: dedent`
+              import * as React from 'react';
+
+              const [test, setTest] = React.useState<React.HTMLProps<HTMLElement>>()
+            `,
             errors: [
               { messageId: 'duplicateImport', data: { syntax: 'namespace' } },
               { messageId: 'addPrefix' },
-            ],
-          },
-        ],
-      });
-    });
-  });
-
-  describe('`default`', () => {
-    describe('valid', () => {
-      ruleTester.run('syntax', syntaxRule, {
-        valid: [
-          {
-            code: "import React from 'react'",
-            options: ['default'],
-          },
-          {
-            code: "import type React from 'react'",
-            options: ['default'],
-          },
-          {
-            code: "import OtherModule from 'otherModule';",
-            options: ['default'],
-          },
-        ],
-
-        invalid: [],
-      });
-    });
-
-    describe('invalid', () => {
-      ruleTester.run('syntax', syntaxRule, {
-        valid: [],
-
-        invalid: [
-          {
-            code: "import React, { useState } from 'react';",
-            options: ['default'],
-            output: "import React from 'react';",
-            errors: [{ messageId: 'wrongImport', data: { syntax: 'default' } }],
-          },
-          {
-            code: "import * as React from 'react';",
-            options: ['default'],
-            output: "import React from 'react';",
-            errors: [{ messageId: 'wrongImport', data: { syntax: 'default' } }],
-          },
-          // both import value and import type
-          {
-            code: "import React, { useState } from 'react';\nimport type { ComponentProps } from 'react';",
-            options: ['default'],
-            output: "import React from 'react';\n",
-            errors: [
-              { messageId: 'wrongImport', data: { syntax: 'default' } },
-              { messageId: 'duplicateImport', data: { syntax: 'default' } },
-            ],
-          },
-          {
-            code: "import type { ComponentProps } from 'react';\nimport React, { useState } from 'react';",
-            output: "import React from 'react';\n",
-            options: ['default'],
-            errors: [
-              { messageId: 'wrongImport', data: { syntax: 'default' } },
-              { messageId: 'duplicateImport', data: { syntax: 'default' } },
-            ],
-          },
-          // duplicate import types
-          {
-            code: "import type { ComponentProps } from 'react';\nimport type { HTMLProps } from 'react';",
-            output: "import type React from 'react';\n",
-            options: ['default'],
-            errors: [
-              { messageId: 'wrongImport', data: { syntax: 'default' } },
-              { messageId: 'duplicateImport', data: { syntax: 'default' } },
             ],
           },
         ],
@@ -351,25 +303,30 @@ describe('style rule ts', () => {
       valid: [],
       invalid: [
         {
-          code: "import type { HTMLProps } from 'react';\ntype Props = HTMLProps<HTMLElement>;",
-          output:
-            "import type * as React from 'react';\ntype Props = React.HTMLProps<HTMLElement>;",
+          code: dedent`
+            import type { HTMLProps } from 'react';
+            type Props = HTMLProps<HTMLElement>;
+          `,
+          output: dedent`
+            import type * as React from 'react';
+            type Props = React.HTMLProps<HTMLElement>;
+          `,
           errors: [
             { messageId: 'wrongImport', data: { syntax: 'namespace' } },
             { messageId: 'addPrefix' },
           ],
         },
         {
-          code: [
-            "import { useState } from 'react'",
-            "import type { HTMLProps } from 'react'",
-            'const [test, setTest] = useState<HTMLProps<HTMLElement>>()',
-          ].join('\n'),
-          output: [
-            "import * as React from 'react';",
-            '',
-            'const [test, setTest] = React.useState<React.HTMLProps<HTMLElement>>()',
-          ].join('\n'),
+          code: dedent`
+            import { useState } from 'react'
+            import type { HTMLProps } from 'react'
+            const [test, setTest] = useState<HTMLProps<HTMLElement>>()
+          `,
+          output: dedent`
+            import * as React from 'react';
+
+            const [test, setTest] = React.useState<React.HTMLProps<HTMLElement>>()
+          `,
           errors: [
             { messageId: 'wrongImport', data: { syntax: 'namespace' } },
             { messageId: 'duplicateImport', data: { syntax: 'namespace' } },
@@ -378,14 +335,14 @@ describe('style rule ts', () => {
           ],
         },
         {
-          code: [
-            "import type { HTMLProps } from 'react'",
-            'interface Test extends HTMLProps<HTMLElement> {}',
-          ].join('\n'),
-          output: [
-            "import type * as React from 'react';",
-            'interface Test extends React.HTMLProps<HTMLElement> {}',
-          ].join('\n'),
+          code: dedent`
+            import type { HTMLProps } from 'react'
+            interface Test extends HTMLProps<HTMLElement> {}
+          `,
+          output: dedent`
+            import type * as React from 'react';
+            interface Test extends React.HTMLProps<HTMLElement> {}
+          `,
           errors: [
             { messageId: 'wrongImport', data: { syntax: 'namespace' } },
             { messageId: 'addPrefix' },

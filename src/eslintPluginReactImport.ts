@@ -1,8 +1,8 @@
 import type { ESLint, Linter } from 'eslint';
 
-import consistentSyntaxRule from './rules/consistent-syntax.js';
 import { createRecommendedConfig } from './configs/recommended.js';
 import { PLUGIN_NAME, PLUGIN_VERSION } from './meta.js';
+import consistentSyntaxRule from './rules/consistent-syntax.js';
 
 const eslintPluginReactImport = {
   meta: {

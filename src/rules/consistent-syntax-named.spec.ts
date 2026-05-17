@@ -1,7 +1,7 @@
-import { describe } from 'vitest';
-import { RuleTester } from 'eslint';
 import typescriptEslintParser from '@typescript-eslint/parser';
 import dedent from 'dedent';
+import { RuleTester } from 'eslint';
+import { describe } from 'vitest';
 
 import syntaxRule from './consistent-syntax.js';
 

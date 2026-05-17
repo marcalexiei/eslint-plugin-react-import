@@ -1,8 +1,8 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { describe, expect, it } from 'vitest';
 import { loadESLint } from 'eslint';
+import { describe, expect, it } from 'vitest';
 
 describe('config recommended', async () => {
   const dirname = path.dirname(fileURLToPath(import.meta.url));

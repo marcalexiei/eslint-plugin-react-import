@@ -1,5 +1,15 @@
 # eslint-plugin-react-import
 
+## 3.0.0
+
+### Major Changes
+
+- [#126](https://github.com/marcalexiei/eslint-plugin-react-import/pull/126) [`6b9369d`](https://github.com/marcalexiei/eslint-plugin-react-import/commit/6b9369dddc7f51b58fab1e3f837ab2b4b145e8e4) Thanks [@marcalexiei](https://github.com/marcalexiei)! - feat!: `eslint` 8 and legacy `.eslintrc` config support have been removed
+  - The plugin now requires ESLint 9 or 10.
+  - Legacy `.eslintrc` configuration is no longer supported — use `eslint.config.js` (flat config) instead
+
+- [#126](https://github.com/marcalexiei/eslint-plugin-react-import/pull/126) [`6b9369d`](https://github.com/marcalexiei/eslint-plugin-react-import/commit/6b9369dddc7f51b58fab1e3f837ab2b4b145e8e4) Thanks [@marcalexiei](https://github.com/marcalexiei)! - feat: support `eslint` v10
+
 ## 2.1.0
 
 ### Minor Changes

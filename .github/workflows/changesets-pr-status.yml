@@ -36,11 +36,19 @@ jobs:
     needs: pr-status
     runs-on: ubuntu-latest
 
-    permissions:
-      pull-requests: write # to create and update comments on PRs (changesets/action/pr-comment)
+    # the comment is posted with the release helper app token
+    permissions: {}
 
     steps:
+      - name: Setup release helper
+        id: release-helper
+        uses: marcalexiei/github-actions/setup-github-app-user-bot@e3b04865510c657477cc722854b31a3b74c72c09 # v2.2.0
+        with:
+          app-id: ${{ vars.RELEASE_HELPER_APP_ID }}
+          private-key: ${{ secrets.RELEASE_HELPER_PRIVATE_KEY }}
+
       - name: Comment on PR
         uses: changesets/action/pr-comment@22ccf9aa43179fe9e27dc62e575971d28cce197c # v2.0.0
         with:
+          github-token: ${{ steps.release-helper.outputs.token }}
           body: ${{ needs.pr-status.outputs.comment-body }}

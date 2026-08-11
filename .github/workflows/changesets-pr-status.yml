@@ -1,8 +1,6 @@
 name: Changesets PR Status
 
-# `pull_request_target` is used to support PRs from forks.
-# No code from the PR is executed here: the job only checks out the base branch
-# and runs `changesets/action/pr-status`, which reads the changesets state.
+# `pull_request_target` supports PRs from forks: no PR code is executed here
 on:
   pull_request_target:
 
@@ -15,6 +13,8 @@ concurrency:
 jobs:
   pr-status:
     name: Generate PR status
+    # skip the release PR opened by `changesets/action`: it never has changesets
+    if: ${{ !startsWith(github.event.pull_request.head.ref, 'changeset-release/') }}
     runs-on: ubuntu-latest
 
     permissions:

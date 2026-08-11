@@ -31,10 +31,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Install Dependencies
-        uses: marcalexiei/github-actions/.github/actions/setup-node-and-pnpm@f492a5a5b202006248f179569f7a1c2d4a2e1e13 # 1.3.0
+        uses: marcalexiei/github-actions/setup-node-and-pnpm@e3b04865510c657477cc722854b31a3b74c72c09 # v2.2.0
         with:
           node-version: ${{ matrix.node }}
 
@@ -50,10 +50,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Install Dependencies
-        uses: marcalexiei/github-actions/.github/actions/setup-node-and-pnpm@f492a5a5b202006248f179569f7a1c2d4a2e1e13 # 1.3.0
+        uses: marcalexiei/github-actions/setup-node-and-pnpm@e3b04865510c657477cc722854b31a3b74c72c09 # v2.2.0
 
       - name: Run format
         run: pnpm run format:check

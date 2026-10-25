@@ -1,15 +1,15 @@
 name: Release
 
 on:
-  workflow_run:
-    workflows:
-      - CI
-    types:
-      - completed
+  push:
     branches:
       - main
 
-concurrency: ${{ github.workflow }}-${{ github.ref }}
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+  # queue every push: without it, a newer run replaces the waiting one and that release is skipped
+  queue: max
 
 permissions: {}
 
@@ -20,7 +20,6 @@ jobs:
   release:
     name: Release
     environment: release-npm
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     permissions:
@@ -53,10 +52,3 @@ jobs:
           pr-title: 'chore: release'
           pr-base-branch: main
           publish-script: 'pnpm release'
-
-  on-ci-fail:
-    name: 'Failure'
-    runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
-    steps:
-      - run: echo 'CI failed. Release won't be executed'

@@ -4,7 +4,7 @@
   "type": "module",
   "description": "ESLint plugin to ensure consistent react imports",
   "engines": {
-    "node": "^20 || ^22 || ^24"
+    "node": "^20 || ^22 || ^24 || >=26"
   },
   "publishConfig": {
     "access": "public"
@@ -68,7 +68,7 @@
     "@marcalexiei/eslint-config": "4.2.0",
     "@marcalexiei/prettier-config": "1.1.4",
     "@types/json-schema": "7.0.15",
-    "@types/node": "24.9.2",
+    "@types/node": "26.6.6",
     "@typescript-eslint/parser": "8.46.2",
     "@vitest/eslint-plugin": "1.4.0",
     "dedent": "1.7.2",

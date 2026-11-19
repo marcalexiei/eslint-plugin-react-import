@@ -54,7 +54,7 @@
     "release": "pnpm run build && changeset publish",
     "check-all": "pnpm run \"/^(lint|format|typecheck|build)$/\" && pnpm run test --run"
   },
-  "packageManager": "pnpm@10.18.3+sha512.bbd16e6d7286fd7e01f6b3c0b3c932cda2965c06a908328f74663f10a9aea51f1129eea615134bf992831b009eabe167ecb7008b597f40ff9bc75946aadfb08d",
+  "packageManager": "pnpm@12.21.0+sha512.66fd8278ee28935ce951792d34367ff3af5c432a2756445823029533835b8da529bbe0be5130afd56ed0713fb8789e47bad82d93bd5ae2fe54b15562d6276ef0",
   "prettier": "@marcalexiei/prettier-config",
   "dependencies": {
     "@types/estree": "^1.0.8"

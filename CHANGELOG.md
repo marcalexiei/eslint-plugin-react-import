@@ -1,5 +1,11 @@
 # eslint-plugin-react-import
 
+## 3.0.1
+
+### Patch Changes
+
+- [#136](https://github.com/marcalexiei/eslint-plugin-react-import/pull/136) [`bbdeb79`](https://github.com/marcalexiei/eslint-plugin-react-import/commit/bbdeb79c8a4479e9b005ecd9faa3352aae3ea424) Thanks [@marcalexiei](https://github.com/marcalexiei)! - chore: declare Node.js 26 support in `engines`
+
 ## 3.0.0
 
 ### Major Changes

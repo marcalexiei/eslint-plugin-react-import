@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Install Dependencies
-        uses: marcalexiei/github-actions/setup-node-and-pnpm@0ac3ea042e173813ebc7b086c174705c5bfc0fb6 # v2.6.2
+        uses: marcalexiei/github-actions/setup-node-and-pnpm@3145eb8a7405dee53929e0c2495e26af7191daf0 # v2.6.4
         with:
           node-version: ${{ matrix.node }}
 
@@ -54,7 +54,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Install Dependencies
-        uses: marcalexiei/github-actions/setup-node-and-pnpm@0ac3ea042e173813ebc7b086c174705c5bfc0fb6 # v2.6.2
+        uses: marcalexiei/github-actions/setup-node-and-pnpm@3145eb8a7405dee53929e0c2495e26af7191daf0 # v2.6.4
 
       - name: Run format
         run: pnpm run format:check
@@ -77,6 +77,6 @@ jobs:
       contents: read # required to read the workflow file
     steps:
       - name: Check needed jobs
-        uses: marcalexiei/github-actions/check-needs@0ac3ea042e173813ebc7b086c174705c5bfc0fb6 # v2.6.2
+        uses: marcalexiei/github-actions/check-needs@3145eb8a7405dee53929e0c2495e26af7191daf0 # v2.6.4
         with:
           needs: ${{ toJSON(needs) }}
